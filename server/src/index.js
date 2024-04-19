@@ -5,12 +5,16 @@ const Budget = require("./models/Budget");
 const app = express();
 const PORT = 5000;
 
+//MIDDLEWARE
+app.use(express.json());
+
 app.post("/budget", async (req, res) => {
+  console.log(req.body);
   const newBudget = new Budget({
-    Category: "Dining",
-    Budgeted_Amount: 100,
-    Actual_Spending: 120,
-    Remaining_Budget: -20,
+    Category: req.body.Category,
+    Budgeted_Amount: req.body.Budgeted_Amount,
+    Actual_Spending: req.body.Actual_Spending,
+    Remaining_Budget: req.body.Remaining_Budget,
   });
   const createdBudget = await newBudget.save();
   res.json(createdBudget);

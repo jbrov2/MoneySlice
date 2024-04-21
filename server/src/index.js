@@ -1,7 +1,11 @@
+const path = require("path");
+
+require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
+
 const express = require("express");
 const mongoose = require("mongoose");
 const Budget = require("./models/Budget");
-
+const url = process.env.MONGODB_URL;
 const app = express();
 const PORT = 5000;
 
@@ -20,12 +24,8 @@ app.post("/budget", async (req, res) => {
   res.json(createdBudget);
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://jbrown:GOJOv2123!@cluster0.evrsull.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`We are listening on PORT ${PORT}`);
-    });
+mongoose.connect(url).then(() => {
+  app.listen(PORT, () => {
+    console.log(`We are listening on PORT ${PORT}`);
   });
+});

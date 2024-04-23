@@ -1,9 +1,17 @@
+/* eslint-disable no-cond-assign */
+/* eslint-disable no-constant-condition */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import Register from "./Register";
 
 function Login() {
+  function signUpPageHandler() {
+    history("/signUp");
+  }
+  const history = useNavigate();
+
   const [email, setEmail] = useState();
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
@@ -13,12 +21,25 @@ function Login() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5173/login", {
-        email,
-        userName,
-        password,
-        valid,
-      });
+      await axios
+        .post("http://localhost:5173/login", {
+          email,
+          userName,
+          password,
+          valid,
+        })
+        .then((res) => {
+          // eslint-disable-next-line no-cond-assign
+          if (res.data === "exist") {
+            history("/home", { state: { id: userName } });
+          } else if ((res.data = "does not exist")) {
+            alert("User is not logged in");
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          alert("Wrong details");
+        });
     } catch (e) {
       console.log(e);
     }
@@ -68,10 +89,7 @@ function Login() {
       <p>OR</p>
       <br />
 
-      <button>
-        {" "}
-        <a href="/Register"></a>Sign Up Page
-      </button>
+      <button onClick={signUpPageHandler}>Sign Up Page</button>
     </>
   );
 }

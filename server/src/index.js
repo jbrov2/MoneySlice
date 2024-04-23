@@ -10,6 +10,7 @@ const app = express();
 const Budget = require("./models/Budget");
 const Login = require("./models/login");
 const { createRequire } = require("module");
+const LoginModel = require("./models/login");
 
 const url = process.env.MONGODB_URL;
 const PORT = 5000;
@@ -21,13 +22,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //ROUTES
-app.get("/Login", cors(), (req, res) => {});
+app.get("/login", cors(), (req, res) => {});
 
-app.post("/Login", async (req, res) => {
-  const { email, userName, password, valid } = req.body;
+app.post("/login", async (req, res) => {
+  const { email, userName, password } = req.body;
 
   try {
-    const check = await Login.findOne({ email: email });
+    const check = await LoginModel.findOne({ email: email });
 
     if (check) {
       res.json("exist");
@@ -39,16 +40,23 @@ app.post("/Login", async (req, res) => {
   }
 });
 
-app.post("/Register", async (req, res) => {
-  const { email, userName, password, valid } = req.body;
+app.post("/signUp", async (req, res) => {
+  const { email, userName, password } = req.body;
+
+  const data = {
+    email: email,
+    userName: userName,
+    password: password,
+  };
 
   try {
-    const check = await Login.findOne({ email: email });
+    const check = await LoginModel.findOne({ email: email });
 
     if (check) {
       res.json("exist");
     } else {
       res.json("does not exist");
+      await LoginModel.insertMany([data]);
     }
   } catch (e) {
     res.json("not exist");
@@ -79,6 +87,8 @@ app.post("/budget", async (req, res) => {
 
 mongoose.connect(url).then(() => {
   app.listen(PORT, () => {
-    console.log(`We are listening on PORT ${PORT}`);
+    console.log(
+      `We are listening on PORT and the Database is connected ${PORT}`
+    );
   });
 });

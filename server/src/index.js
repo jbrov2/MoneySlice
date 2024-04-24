@@ -10,7 +10,6 @@ const app = express();
 const Budget = require("./models/Budget");
 const Login = require("./models/login");
 const { createRequire } = require("module");
-const LoginModel = require("./models/login");
 
 const url = process.env.MONGODB_URL;
 const PORT = 5000;
@@ -40,26 +39,32 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/signUp", (req, res) => {
+  res.send("Welcome to the signUp page");
+});
+
 app.post("/signUp", async (req, res) => {
   const { email, userName, password } = req.body;
 
-  const data = {
+  const newUser = new Login({
     email: email,
     userName: userName,
     password: password,
-  };
+  });
 
   try {
-    const check = await LoginModel.findOne({ email: email });
+    const existingUser = await Login.findOne({ email });
 
-    if (check) {
-      res.json("exist");
+    if (existingUser) {
+      return res.json("This user exists");
     } else {
-      res.json("does not exist");
-      await LoginModel.insertMany([data]);
+      await newUser.save();
+      res.json("Made new user");
+      console.log("User has been created");
     }
-  } catch (e) {
-    res.json("not exist");
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json("Internal Server Error");
   }
 
   // const newRegister = new Register({

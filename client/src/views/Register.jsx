@@ -20,7 +20,7 @@ function Register() {
 
     try {
       await axios
-        .post("http://localhost:5173/login", {
+        .post("http://localhost:5000/signUp", {
           email,
           userName,
           password,
@@ -34,8 +34,8 @@ function Register() {
             history("/home", { state: { id: userName } });
           }
         })
-        .catch((e) => {
-          console.log(e);
+        .catch((error) => {
+          console.error("Error:", error);
           alert("Wrong details");
         });
     } catch (e) {
@@ -45,7 +45,7 @@ function Register() {
   return (
     <>
       <h1>Register</h1>
-      <form action="POST">
+      <form action="http://localhost:5000/signUp" method="POST">
         <input
           type="text"
           onChange={(e) => {

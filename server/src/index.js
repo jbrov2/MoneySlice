@@ -24,12 +24,15 @@ app.use(cors());
 app.get("/login", cors(), (req, res) => {});
 
 app.post("/login", async (req, res) => {
-  const { email, userName, password } = req.body;
+  const { userName, password } = req.body;
 
   try {
-    const check = await LoginModel.findOne({ email: email });
+    // const existingUser = await Login.findOne({ userName });
+    const existingUser = await Login.find({ userName, password });
+    //add some logic where it checks for username and password before moving to next page
+    //Watch JWT video
 
-    if (check) {
+    if (existingUser) {
       res.json("exist");
     } else {
       res.json("does not exist");

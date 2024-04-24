@@ -12,21 +12,17 @@ function Login() {
   }
   const history = useNavigate();
 
-  const [email, setEmail] = useState();
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
-  const [valid, setValid] = useState();
 
   async function submit(e) {
     e.preventDefault();
 
     try {
       await axios
-        .post("http://localhost:5173/login", {
-          email,
+        .post("http://localhost:5000/login", {
           userName,
           password,
-          valid,
         })
         .then((res) => {
           // eslint-disable-next-line no-cond-assign
@@ -40,22 +36,14 @@ function Login() {
           console.log(e);
           alert("Wrong details");
         });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   }
   return (
     <>
       <h1>Login</h1>
-      <form action="POST">
-        <input
-          type="text"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Email"
-          required
-        />
+      <form action="http://localhost:5000/login" method="GET">
         <input
           type="text"
           onChange={(e) => {
@@ -70,14 +58,6 @@ function Login() {
             setPassword(e.target.value);
           }}
           placeholder="Password"
-          required
-        />
-        <input
-          type="Password"
-          onChange={(e) => {
-            setValid(e.target.value);
-          }}
-          placeholder="Re-Enter Password"
           required
         />
         <button type="submit" onClick={submit}>

@@ -4,6 +4,10 @@ import "../styles/landingPage.css";
 function LandingPage() {
   const link = useNavigate();
 
+  function handleLoginPage() {
+    link("/login");
+  }
+
   function handleSignUpPage() {
     link("/signUp");
   }
@@ -19,7 +23,7 @@ function LandingPage() {
             <li className="nav-item" id="Logo">
               Money Slice
             </li>
-            <li className="nav-item" id="login-btn">
+            <li className="nav-item" id="login-btn" onClick={handleLoginPage}>
               Login
             </li>
           </ul>

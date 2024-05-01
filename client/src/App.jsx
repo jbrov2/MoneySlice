@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import LandingPage from "./views/landingPage";
 import CreateAPie from "./views/createBudget";
+import ViewAPie from "./views/viewBudget";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/createAPie" element={<CreateAPie></CreateAPie>}></Route>
+          <Route path="/viewAPie" element={<ViewAPie></ViewAPie>} />
           <Route
             path="/landingPage"
             element={<LandingPage></LandingPage>}

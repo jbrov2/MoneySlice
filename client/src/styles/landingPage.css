@@ -59,6 +59,11 @@ li{
     font-family: 'Jost';
 }
 
+#logout-btn{
+    font-size: 24px;
+    font-family: 'Jost';
+}
+
 #login-btn:hover{
     cursor: pointer;
     color:#E84855 ;

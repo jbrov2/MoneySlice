@@ -1,7 +1,13 @@
 /* eslint-disable no-constant-condition */
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRef, useState, useEffect } from "react";
+import {
+  faCheck,
+  faTimes,
+  faInfoCircle,
+  faC,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Register() {
   const history = useNavigate();
@@ -9,11 +15,48 @@ function Register() {
   function loginPageHandler() {
     history("/login");
   }
+  const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+  const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+  const userRef = useRef();
+  const errRef = useRef();
 
-  const [email, setEmail] = useState();
-  const [userName, setUserName] = useState();
-  const [password, setPassword] = useState();
-  const [valid, setValid] = useState();
+  const [email, setEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  //username
+  const [userName, setUserName] = useState("");
+  const [validUserName, setValidUsername] = useState(false);
+  const [userFocus, setUserFocus] = useState(false);
+  //password
+  const [password, setPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+  //validation
+  const [matchPassword, setMatchPassword] = useState("");
+  const [matchValid, setMatchValid] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
+  //eror success messages
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  //Validation
+  useEffect(() => {
+    const result = USER_REGEX.test(userName);
+
+    setValidUsername(result);
+  }, [userName]);
+
+  useEffect(() => {
+    const result = PWD_REGEX.test(password);
+    console.log(result);
+    console.log(password);
+    setValidPassword(result);
+    const match = password === matchPwd;
+    setValidMatch(match);
+  }, [pwd, matchPwd]);
 
   async function submit(e) {
     e.preventDefault();

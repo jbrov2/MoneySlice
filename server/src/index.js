@@ -21,26 +21,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //ROUTES
+app.use("/signUp", require("./routes/signUp"));
+app.use("/login", require("./routes/auth"));
 app.get("/login", cors(), (req, res) => {});
+// app.post("/login", async (req, res) => {
+//   const { userName, password } = req.body;
 
-app.post("/login", async (req, res) => {
-  const { userName, password } = req.body;
+//   try {
+//     // const existingUser = await Login.findOne({ userName });
+//     const existingUser = await Login.find({ userName, password });
+//     //add some logic where it checks for username and password before moving to next page
+//     //Watch JWT video
 
-  try {
-    // const existingUser = await Login.findOne({ userName });
-    const existingUser = await Login.find({ userName, password });
-    //add some logic where it checks for username and password before moving to next page
-    //Watch JWT video
-
-    if (existingUser) {
-      res.json("exist");
-    } else {
-      res.json("does not exist");
-    }
-  } catch (e) {
-    res.json("not exist");
-  }
-});
+//     if (existingUser) {
+//       res.json("exist");
+//     } else {
+//       res.json("does not exist");
+//     }
+//   } catch (e) {
+//     res.json("not exist");
+//   }
+// });
 
 app.get("/signUp", (req, res) => {
   res.send("Welcome to the signUp page");

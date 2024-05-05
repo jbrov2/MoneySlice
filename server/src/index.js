@@ -16,13 +16,14 @@ const PORT = 5000;
 
 //MIDDLEWARE
 app.use(express.json());
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //ROUTES
+
 app.use("/signUp", require("./routes/signUp"));
 app.use("/login", require("./routes/auth"));
+app.use("/budget", require("./routes/budget"));
 app.get("/login", cors(), (req, res) => {});
 // app.post("/login", async (req, res) => {
 //   const { userName, password } = req.body;
@@ -82,17 +83,17 @@ app.post("/signUp", async (req, res) => {
   // res.json(createdRegister);
 });
 
-app.post("/budget", async (req, res) => {
-  console.log(req.body);
-  const newBudget = new Budget({
-    Category: req.body.Category,
-    Budgeted_Amount: req.body.Budgeted_Amount,
-    Actual_Spending: req.body.Actual_Spending,
-    Remaining_Budget: req.body.Remaining_Budget,
-  });
-  const createdBudget = await newBudget.save();
-  res.json(createdBudget);
-});
+// app.post("/budget", async (req, res) => {
+//   console.log(req.body);
+//   const newBudget = new Budget({
+//     Category: req.body.Category,
+//     Budgeted_Amount: req.body.Budgeted_Amount,
+//     Actual_Spending: req.body.Actual_Spending,
+//     Remaining_Budget: req.body.Remaining_Budget,
+//   });
+//   const createdBudget = await newBudget.save();
+//   res.json(createdBudget);
+// });
 
 mongoose.connect(url).then(() => {
   app.listen(PORT, () => {

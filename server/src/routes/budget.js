@@ -5,7 +5,7 @@ const Budget = require("../models/Budget");
 router
   .route("/")
   .get((req, res) => {
-    res.json(budgets);
+    res.json(Budget);
   })
   .post(async (req, res) => {
     console.log(req.body);

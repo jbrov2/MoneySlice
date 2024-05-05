@@ -8,7 +8,7 @@ const app = express();
 
 //MODELS
 const Budget = require("./models/Budget");
-const Login = require("./models/login");
+const User = require("./models/User");
 const { createRequire } = require("module");
 
 const url = process.env.MONGODB_URL;

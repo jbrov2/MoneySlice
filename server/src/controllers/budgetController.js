@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const getAllBudgets = async (req, res) => {
   //verify the user check to see userID
   try {
-    const userId = req.user.id;
-    const budget = await Budget.find({ user: userId });
+    const userId = req.user._id;
+    const budget = await Budget.find({ user: userId }).exec();
 
     res.json({
       sucess: `Congrats ${req.user.userName} you can now see your budets`,
@@ -19,18 +19,16 @@ const getAllBudgets = async (req, res) => {
 };
 
 const createNewBudget = async (req, res) => {
-  //checking to see if you are logged in
   try {
     // Check if user is logged in
-    const userId = req.user._id;
-    console.log("this is the", userId);
+    const userId = req.user_id; // Access userId from req.user
     // Create a new budget and associate it with the current user
     const newBudget = new Budget({
       Category: req.body.Category,
       Budgeted_Amount: req.body.Budgeted_Amount,
       Actual_Spending: req.body.Actual_Spending,
       Remaining_Budget: req.body.Remaining_Budget,
-      owner: userId, // Use 'Owner' instead of 'owner'
+      owner: userId, // Use userId from req.user
     });
 
     const createdBudget = await newBudget.save();

@@ -48,40 +48,40 @@ app.get("/signUp", (req, res) => {
   res.send("Welcome to the signUp page");
 });
 
-app.post("/signUp", async (req, res) => {
-  const { email, userName, password } = req.body;
+// app.post("/signUp", async (req, res) => {
+//   const { email, userName, password } = req.body;
 
-  const newUser = new Login({
-    email: email,
-    userName: userName,
-    password: password,
-  });
+//   const newUser = new Login({
+//     email: email,
+//     userName: userName,
+//     password: password,
+//   });
 
-  try {
-    const existingUser = await Login.findOne({ email });
+//   try {
+//     const existingUser = await Login.findOne({ email });
 
-    if (existingUser) {
-      return res.json("This user exists");
-    } else {
-      await newUser.save();
-      res.json("Made new user");
-      console.log("User has been created");
-    }
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json("Internal Server Error");
-  }
+//     if (existingUser) {
+//       return res.json("This user exists");
+//     } else {
+//       await newUser.save();
+//       res.json("Made new user");
+//       console.log("User has been created");
+//     }
+//   } catch (error) {
+//     console.error("Error creating user:", error);
+//     res.status(500).json("Internal Server Error");
+//   }
 
-  // const newRegister = new Register({
-  //   email: req.body.email,
-  //   userName: req.body.userName,
-  //   password: req.body.password,
-  //   valid_password: req.body.valid_password,
-  // });
+//   // const newRegister = new Register({
+//   //   email: req.body.email,
+//   //   userName: req.body.userName,
+//   //   password: req.body.password,
+//   //   valid_password: req.body.valid_password,
+//   // });
 
-  // const createdRegister = await newRegister.save();
-  // res.json(createdRegister);
-});
+//   // const createdRegister = await newRegister.save();
+//   // res.json(createdRegister);
+// });
 
 // app.post("/budget", async (req, res) => {
 //   console.log(req.body);

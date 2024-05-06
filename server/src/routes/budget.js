@@ -1,24 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const Budget = require("../models/Budget");
+const User = require("../models/User");
+const verifyJWTs = require("../middleware/verifyJWT");
+const {
+  getAllBudgets,
+  createNewBudget,
+  updateBudget,
+  deleteBudget,
+} = require("../controllers/budgetController");
 
 router
   .route("/")
-  .get((req, res) => {
-    res.json(Budget);
-  })
-  .post(async (req, res) => {
-    console.log(req.body);
-    const newBudget = new Budget({
-      Category: req.body.Category,
-      Budgeted_Amount: req.body.Budgeted_Amount,
-      Actual_Spending: req.body.Actual_Spending,
-      Remaining_Budget: req.body.Remaining_Budget,
-    });
-    const createdBudget = await newBudget.save();
-    res.json(createdBudget);
-  });
-//add put and delete request once you link budget to the user
+  .get(verifyJWTs, getAllBudgets)
+  .post(verifyJWTs, createNewBudget)
+  .put(verifyJWTs, updateBudget)
+  .delete(verifyJWTs, deleteBudget);
 
 router.route("/:id").get((req, res) => res.json({ id: req.params }));
 module.exports = router;

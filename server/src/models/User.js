@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   userId: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
   },
 
   email: {
@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  budgets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Budget" }],
 });
 
 const UserModel = mongoose.model("User", UserSchema);

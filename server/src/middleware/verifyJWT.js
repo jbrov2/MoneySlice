@@ -12,7 +12,6 @@ const verifyjwt = (req, res, next) => {
       return res.sendStatus(403); //invalid token
     }
     req.user = decoded;
-    console.log(decoded);
     next();
   });
 };

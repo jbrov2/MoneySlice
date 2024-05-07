@@ -17,6 +17,7 @@ const PORT = 5000;
 
 //MIDDLEWARE
 app.use(express.json());
+//built in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: true }));
 //Cross Origin Resource Sharing
 app.use(cors());

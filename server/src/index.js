@@ -16,12 +16,17 @@ const url = process.env.MONGODB_URL;
 const PORT = 5000;
 
 //MIDDLEWARE
+//built in middleware for json
 app.use(express.json());
+
 //built in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: true }));
+
 //Cross Origin Resource Sharing
 app.use(cors());
-// app.use(require("./middleware/verifyJWT"));
+
+//middleware for cookies
+app.use(cookieParser());
 
 //ROUTES
 

@@ -5,6 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const cookieParser = require("cookie-parser");
 
 //MODELS
 const Budget = require("./models/Budget");
@@ -17,6 +18,7 @@ const PORT = 5000;
 //MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+//Cross Origin Resource Sharing
 app.use(cors());
 // app.use(require("./middleware/verifyJWT"));
 

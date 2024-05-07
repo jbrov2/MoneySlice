@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
-
   email: {
     type: String,
     required: true,
@@ -14,12 +9,21 @@ const UserSchema = new Schema({
   userName: {
     type: String,
     required: true,
+    unique: true,
+    index: true,
   },
   password: {
     type: String,
     required: true,
   },
-  budgets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Budget" }],
+  budgets: [
+    {
+      Category: String,
+      Budgeted_Amount: Number,
+      Actual_Spending: Number,
+      Remaining_Budget: Number,
+    },
+  ],
 });
 
 const UserModel = mongoose.model("User", UserSchema);

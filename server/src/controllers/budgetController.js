@@ -1,17 +1,15 @@
-const Budget = require("../models/Budget");
-const User = require("../models/User");
+const UserModel = require("../models/User");
 const mongoose = require("mongoose");
 
 const getAllBudgets = async (req, res) => {
   //verify the user check to see userID
   try {
     const userId = req.user._id;
-    const budget = await Budget.find({ user: userId }).exec();
-
-    res.json({
-      sucess: `Congrats ${req.user.userName} you can now see your budets`,
-      budget,
-    });
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user.budgets);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to retrieve budgets" });
@@ -21,24 +19,25 @@ const getAllBudgets = async (req, res) => {
 const createNewBudget = async (req, res) => {
   try {
     // Check if user is logged in
-    const userId = req.user_id; // Access userId from req.user
+    const userName = req.user.userName; // Access userId from req.user
+    const user = await UserModel.findOne({ userName });
+
+    //checking if the user is found
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
     // Create a new budget and associate it with the current user
-    const newBudget = new Budget({
+    const newBudget = {
       Category: req.body.Category,
       Budgeted_Amount: req.body.Budgeted_Amount,
       Actual_Spending: req.body.Actual_Spending,
       Remaining_Budget: req.body.Remaining_Budget,
-      owner: userId, // Use userId from req.user
-    });
+    };
 
-    const createdBudget = await newBudget.save();
-
-    // Update the User model to include the budget ID
-    await User.findByIdAndUpdate(userId, {
-      $push: { budgets: createdBudget._id },
-    });
-
-    res.json(createdBudget);
+    user.budgets.push(newBudget);
+    await user.save();
+    res.json(newBudget);
+    console.log("Budget has been created");
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to create budget" });

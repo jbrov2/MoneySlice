@@ -7,11 +7,12 @@ const verifyjwt = (req, res, next) => {
   console.log(authHeader); // Bearer token
   const token = authHeader.split(" ")[1];
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    if (err) {
-      console.error("JWT verification failed: ", err);
+    if (err || !decoded) {
+      console.error("JWT verification failed or token is not defined: ", err);
       return res.sendStatus(403); //invalid token
     }
     req.user = decoded;
+    console.log(decoded);
     next();
   });
 };

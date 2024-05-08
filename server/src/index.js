@@ -6,7 +6,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cookieParser = require("cookie-parser");
-
+const verifyJWT = require("./middleware/verifyJWT");
 //MODELS
 const Budget = require("./models/Budget");
 const User = require("./models/User");
@@ -32,6 +32,9 @@ app.use(cookieParser());
 
 app.use("/signUp", require("./routes/signUp"));
 app.use("/login", require("./routes/auth"));
+app.use("/refresh", require("./routes/refresh"));
+
+app.use(verifyJWT);
 app.use("/budget", require("./routes/budget"));
 app.get("/login", cors(), (req, res) => {});
 // app.post("/login", async (req, res) => {

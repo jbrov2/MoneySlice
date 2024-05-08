@@ -2,7 +2,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import axios from "axios";
+
 import { useNavigate, Link } from "react-router-dom";
 import Register from "./Register";
 
@@ -17,33 +17,11 @@ function Login() {
 
   async function submit(e) {
     e.preventDefault();
-
-    try {
-      await axios
-        .post("http://localhost:5000/login", {
-          userName,
-          password,
-        })
-        .then((res) => {
-          // eslint-disable-next-line no-cond-assign
-          if (res.data === "exist") {
-            history("/home", { state: { id: userName } });
-          } else if ((res.data = "does not exist")) {
-            alert("User is not logged in");
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          alert("Wrong details");
-        });
-    } catch (error) {
-      console.log(error);
-    }
   }
   return (
     <>
       <h1>Login</h1>
-      <form action="http://localhost:5000/login" method="GET">
+      <form action="http://localhost:5000/login" method="POST">
         <input
           type="text"
           onChange={(e) => {

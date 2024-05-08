@@ -1,6 +1,5 @@
 /* eslint-disable no-constant-condition */
 import { useNavigate } from "react-router-dom";
-import axios from "../../../server/api/axios";
 import { useRef, useState, useEffect } from "react";
 
 import {

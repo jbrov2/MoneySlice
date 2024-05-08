@@ -1,44 +1,31 @@
 const User = require("../models/User");
 
-const handleRefreshToken = async (req, res) => {
+const handleLogout = async (req, res) => {
+  //On client, also delete the accessToken
+
   const cookies = req.cookies;
-  if (!cookies?.jwt) return res.sendStatus(401);
+  if (!cookies?.jwt) return res.sendStatus(204); //No content
   const refreshToken = cookies.jwt;
 
   try {
-    //Checking refreshToken Value
-    console.log("Received refreshToken:", refreshToken);
+    //is refreshtoken in db
 
     const foundUser = await User.findOne({ refreshToken }).exec();
     if (!foundUser) {
-      console.error("Failed to find the user");
-      return res.sendStatus(403); //Forbidden
+      res.clearCookie("jwt", { httpOnly: true });
+      return res.sendStatus(204); //Successful and No Content
     }
+    //Delete refreshToken in db
+    foundUser.refreshToken = "";
+    const result = await foundUser.save();
+    console.log(result);
 
-    // Evalute jwt
-    jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
-      (err, decoded) => {
-        if (err || foundUser.userName !== decoded.userName) {
-          console.error(
-            "JWT verification failed or token is not defined: ",
-            err
-          );
-          return res.sendStatus(403); //forbidden
-        }
-        const accessToken = jwt.sign(
-          { userName: decoded.userName },
-          process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: "5m" }
-        );
-        res.json({ accessToken });
-      }
-    );
+    res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
+    res.sendStatus(204);
   } catch (error) {
     console.log("Error:", error);
     res.sendStatus(500); //internal error
   }
 };
 
-module.exports = { handleRefreshToken };
+module.exports = { handleLogout };

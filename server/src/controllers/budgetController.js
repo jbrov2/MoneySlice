@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const getAllBudgets = async (req, res) => {
   //verify the user check to see userID
   try {
-    const userId = req.user.userName;
-    const user = await UserModel.findById(userId);
+    const userName = req.user.userName;
+    const user = await UserModel.findById(userName);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

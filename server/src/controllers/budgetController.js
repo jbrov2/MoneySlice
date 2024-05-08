@@ -48,7 +48,7 @@ const updateBudget = async (req, res) => {
   //verify the user
   const userName = req.user.userName; //Grabbing username from the req
   const user = UserModel.findOne({ userName }); //grabbing username from db
-  const budgetName = UserModel.findOne({ Category });
+  const editBudget = UserModel.findOne({ Category });
 
   try {
     //checking for user
@@ -56,11 +56,15 @@ const updateBudget = async (req, res) => {
       return res.sendStatus(404).json({ message: "user has not been found" });
     }
     //checking for budget
-    if (!budgetName) {
+    if (!editBudget) {
       return res
         .sendStatus(404)
         .json({ message: "That budget does not exist" });
     }
+
+    //updating
+
+    budgetName = {};
   } catch (error) {}
 };
 

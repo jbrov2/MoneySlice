@@ -64,7 +64,10 @@ const updateBudget = async (req, res) => {
 
     //updating
 
-    budgetName = {};
+    budgetName = {
+      Budgeted_Amount: req.body.Budgeted_Amount,
+      Actual_Spending: req.body.Actual_Spending,
+    };
   } catch (error) {}
 };
 

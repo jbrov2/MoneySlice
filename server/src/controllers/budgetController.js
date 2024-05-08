@@ -44,7 +44,25 @@ const createNewBudget = async (req, res) => {
   }
 };
 
-const updateBudget = async (req, res) => {};
+const updateBudget = async (req, res) => {
+  //verify the user
+  const userName = req.user.userName; //Grabbing username from the req
+  const user = UserModel.findOne({ userName }); //grabbing username from db
+  const budgetName = UserModel.findOne({ Category });
+
+  try {
+    //checking for user
+    if (!user) {
+      return res.sendStatus(404).json({ message: "user has not been found" });
+    }
+    //checking for budget
+    if (!budgetName) {
+      return res
+        .sendStatus(404)
+        .json({ message: "That budget does not exist" });
+    }
+  } catch (error) {}
+};
 
 const deleteBudget = async (req, res) => {};
 

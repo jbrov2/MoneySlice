@@ -2,43 +2,25 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const handleLogin = async (req, res) => {
-  const { userName, password } = req.body;
-  if (!userName || !password)
-    return res
-      .status(400)
-      .json({ message: "Username and password is required." });
+const handleRefreshToken = (req, res) => {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(401);
+  const refreshToken = cookies.jwt;
 
-  const foundUser = await User.findOne({ userName: userName }).exec();
-  if (!foundUser) return res.sendStatus(401); //Unauthorized
-  // Evalute password
-  const match = await bcrypt.compare(password, foundUser.password);
-  if (match) {
-    //create JWTs
+  const foundUser = User.findOne({ refreshToken }).exec();
+  if (!foundUser) return res.sendStatus(403); //Forbidden
+  // Evalute jwt
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || foundUser.userName !== decoded.userName)
+      return res.sendStatus(403); //forbidden
+
     const accessToken = jwt.sign(
-      { userName: foundUser.userName },
+      { userName: decoded.userName },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "5m" }
     );
-    const refreshToken = jwt.sign(
-      { userName: foundUser.userName },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
-    );
-    //saving refresh token
-
-    foundUser.refreshToken = refreshToken;
-    const result = await foundUser.save();
-    console.log(result);
-
-    res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
     res.json({ accessToken });
-  } else {
-    res.sendStatus(401);
-  }
+  });
 };
 
-module.exports = { handleLogin };
+module.exports = { handleRefreshToken };

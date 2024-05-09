@@ -8,8 +8,10 @@ const addAccessToken = (req, res, next) => {
   if (accessToken) {
     //add the access token to the request headers
     req.headers.authorization = `Bearer ${accessToken}`;
+    next();
+  } else {
+    next();
   }
-  next();
 };
 
 module.exports = addAccessToken;

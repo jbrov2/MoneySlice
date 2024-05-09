@@ -79,6 +79,32 @@ const updateBudget = async (req, res) => {
   }
 };
 
-const deleteBudget = async (req, res) => {};
+const deleteBudget = async (req, res) => {
+  try {
+    //verify the user
+    const userName = req.user.userName;
+    const user = await UserModel.findOne({ userName }); //grabbing username from db
+    //grab the category name that the user wants to delete
+    const { Category } = req.body;
+    //checking for the user
+    if (!user)
+      return res.sendStatus(404).json({ message: "User is not found" });
+
+    const result = await UserModel.updateOne(
+      { userName: userName },
+      { $pull: { budgets: { Category: Category } } }
+    );
+
+    //Check if any docs were modified
+    if (result.nModified === 0) {
+      return res.status(404).json({ message: "Budget not found for deletion" });
+    }
+
+    res.json({ message: "Budget was deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete budget" });
+  }
+};
 
 module.exports = { getAllBudgets, createNewBudget, updateBudget, deleteBudget };

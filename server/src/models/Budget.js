@@ -7,7 +7,13 @@ const BudgetSchema = new Schema({
   Category: String,
   Budgeted_Amount: Number,
   Actual_Spending: Number,
-  Remaining_Budget: Number,
+  Remaining_Budget: {
+    type: Number,
+    default: function () {
+      //Set default value to Budgeted Amount if not provided
+      return this.Budgeted_Amount || 0;
+    },
+  },
   // id: mongoose.Schema.Types.ObjectId,
 });
 

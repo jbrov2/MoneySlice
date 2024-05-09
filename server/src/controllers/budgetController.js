@@ -31,7 +31,6 @@ const createNewBudget = async (req, res) => {
       Category: req.body.Category,
       Budgeted_Amount: req.body.Budgeted_Amount,
       Actual_Spending: req.body.Actual_Spending,
-      Remaining_Budget: req.body.Remaining_Budget,
     };
 
     user.budgets.push(newBudget);
@@ -45,30 +44,40 @@ const createNewBudget = async (req, res) => {
 };
 
 const updateBudget = async (req, res) => {
-  //verify the user
-  const userName = req.user.userName; //Grabbing username from the req
-  const user = UserModel.findOne({ userName }); //grabbing username from db
-  const editBudget = UserModel.findOne({ Category });
-
   try {
+    //verify the user
+    const userName = req.user.userName; //Grabbing username from the req
+    const user = await UserModel.findOne({ userName }); //grabbing username from db
+
     //checking for user
     if (!user) {
       return res.sendStatus(404).json({ message: "user has not been found" });
     }
-    //checking for budget
-    if (!editBudget) {
-      return res
-        .sendStatus(404)
-        .json({ message: "That budget does not exist" });
+    //Grabbing the Category, Budgeted_Amount, and the Actual_Spending
+    const { Category, Budgeted_Amount, Actual_Spending } = req.body;
+
+    //checks the index of the element and tries to find a matching Category, if not it returns -1
+    const editBudgetIndex = user.budgets.findIndex(
+      (budget) => budget.Category === Category
+    );
+
+    if (editBudgetIndex === -1) {
+      return res.status(404).json({ message: "Budget has not been found" });
     }
-
     //updating
+    user.budgets[editBudgetIndex].Budgeted_Amount = Budgeted_Amount;
+    user.budgets[editBudgetIndex].Actual_Spending = Actual_Spending;
+    user.budgets[editBudgetIndex].Remaining_Budget =
+      Budgeted_Amount - Actual_Spending;
 
-    budgetName = {
-      Budgeted_Amount: req.body.Budgeted_Amount,
-      Actual_Spending: req.body.Actual_Spending,
-    };
-  } catch (error) {}
+    //save budget
+    await user.save();
+    res.json(user.budgets[editBudgetIndex]);
+    console.log("Budget has been updated");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update budget" });
+  }
 };
 
 const deleteBudget = async (req, res) => {};

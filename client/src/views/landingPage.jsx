@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import "../styles/landingPage.css";
+// eslint-disable-next-line no-unused-vars
+import { classes, id } from "../styles/landingPage.module.css";
 
 function LandingPage() {
   const link = useNavigate();
@@ -34,10 +35,10 @@ function LandingPage() {
           </div>
         </nav>
       </header> */}
-      <div className="wrapper">
+      <div className={`${classes.wrapper}`}>
         <body>
-          <section className="main">
-            <div className="title-circle">
+          <section className={`${classes.main}`}>
+            <div className={`${classes.title_circle}`}>
               <div className="title">
                 <h1>Money Slice</h1>
               </div>

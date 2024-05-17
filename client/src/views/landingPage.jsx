@@ -39,19 +39,28 @@ function LandingPage() {
         <body>
           <section className={`${classes.main}`}>
             <div className={`${classes.title_circle}`}>
-              <div className="title">
+              <div className={`${classes.title}`}>
                 <h1>Money Slice</h1>
               </div>
             </div>
-            <div className="landing-text">
-              <h3 className="intro-text">Your go to</h3>
-              <h3 className="intro-text" id="special">
+            <div className={`${classes.landing}`}>
+              <h3 className={`${classes.landing_text}`}>Your go to</h3>
+              <h3
+                className={`${classes.landing_text}`}
+                id={`${id.special_text}`}
+              >
                 pie chart
               </h3>
-              <h3 className="landing-text">budgeting app</h3>
+              <h3 className={`${classes.landing_text}`}>budgeting app</h3>
             </div>
-            <button className="sign-Up-btn" onClick={handleSignUpPage}></button>
-            <button className="login-btn" onClick={handleLoginPage}></button>
+            <button
+              className={`${classes.signUp_btn}`}
+              onClick={handleSignUpPage}
+            ></button>
+            <button
+              className={`${classes.login_btn}`}
+              onClick={handleLoginPage}
+            ></button>
           </section>
         </body>
       </div>

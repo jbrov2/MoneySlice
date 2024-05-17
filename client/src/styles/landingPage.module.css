@@ -1,5 +1,27 @@
-.title_circle {
-    height: 1076px ;
-    width: 1266px;
-    background-color: #99D19C;
+*{
+    margin: 0;
 }
+.wrapper{
+    overflow: hidden;
+    background-color: #99d19c;
+    height: 100vh;
+}
+
+.main{
+
+}
+.title{
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 220px;
+    color: #73ab8d; ;
+}
+
+.title:hover{
+    cursor: pointer;
+}
+
+
+

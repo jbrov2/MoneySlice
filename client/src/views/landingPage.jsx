@@ -14,7 +14,7 @@ function LandingPage() {
 
   return (
     <>
-      <header className="header">
+      {/* <header className="header">
         <nav className="navbar">
           <ul className="nav-menu">
             <li className="nav-item" id="services">
@@ -33,23 +33,24 @@ function LandingPage() {
             <span className="bar"></span>
           </div>
         </nav>
-      </header>
+      </header> */}
       <div className="wrapper">
         <body>
           <section className="main">
-            <p className="main-text">
-              Welcome to
-              {/* <span id="Money">Money</span> */}
-              <div id="Money">Money</div>
-              <span id="Slice">Slice</span>
-            </p>
-            <p className="sub-text">
-              Your go to <span id="pie-chart-txt">pie-chart</span> based <br />{" "}
-              budgeting app.
-            </p>
-            <button className="sign-Up-btn" onClick={handleSignUpPage}>
-              Sign Up
-            </button>
+            <div className="title-circle">
+              <div className="title">
+                <h1>Money Slice</h1>
+              </div>
+            </div>
+            <div className="landing-text">
+              <h3 className="intro-text">Your go to</h3>
+              <h3 className="intro-text" id="special">
+                pie chart
+              </h3>
+              <h3 className="landing-text">budgeting app</h3>
+            </div>
+            <button className="sign-Up-btn" onClick={handleSignUpPage}></button>
+            <button className="login-btn" onClick={handleLoginPage}></button>
           </section>
         </body>
       </div>

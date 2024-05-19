@@ -1,27 +1,123 @@
-*{
+* {
     margin: 0;
-}
-.wrapper{
+  }
+  
+  @font-face {
+    font-family: 'Jaro',sans-serif;
+    src: url('../assets/Jaro-Regular-VariableFont_opsz.ttf') format('truetype');
+  }
+  @font-face {
+    font-family:"Kanit", sans-serif ;
+    src: url('../assets/Kanit-Regular.ttf') format('truetype');
+  }
+
+  .wrapper {
+    font-family: "Jaro";
+    display: grid; 
     overflow: hidden;
-    background-color: #99d19c;
     height: 100vh;
-}
+    grid-template-areas:
+      "a a b b"
+      "a a b b"
+      "a a b b"; 
+    ;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(4,1fr);
+    gap: 0em;
 
-.main{
+  }
+  
+  .main {
+    display: contents;  
+  }
+  
+  .title {
 
-}
-.title{
-    margin-top: 1em;
+    font-family: "Kanit", sans-serif;
+    font-style: normal;
+    background-color: #2F4B26;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 220px;
-    color: #73ab8d; ;
-}
-
-.title:hover{
+    font-size: 104px;
+    color: #85BDA6;
+    grid-area: a; /* Assign to grid area 'a' */
+  
+  }
+  
+  .title:hover h1 {
     cursor: pointer;
-}
+    transition: 1.4s;
+    transform: scale(1.4s);
+  }
 
+  .title:hover::after h1{
+    transition: 1.2s;
+    transform: scale(1);
+  }
+  #splice{
+    text-align: center;
+    display: block;
+  }
+  
+  .landing {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    grid-area: b; /* Assign to grid area 'b' */
+    background-color: ghostwhite;
+    background: url('../assets/site-bkg.png') center/cover;
 
+  backdrop-filter: blur(5px); /* Apply blur effect to the background */
+  background-color: rgba(0, 0, 0, 0.774); /* Add some transparency to the background */
+  }
 
+  .landing_block{
+    background-color: black;
+  }
+  
+  .landing_text {
+    font-family: 'Kanit', sans-serif;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-style: normal;
+   font-size: 4em;
+   margin: 0.25em;
+   color: #3E885B;
+
+  }
+
+  .landing_text:nth-child(3){
+    font-size: 56px;
+  }
+  
+  #special_text {
+    color: #85BDA6;
+    font-size: 104px;
+  }
+  
+
+  .buttons{
+    margin-top: 4em;
+  }
+  .signUp_btn,
+  .login_btn {
+   font-family:'Kanit', sans-serif ;
+    margin: 1em 1em;
+    padding: 1em 3em;
+    font-size: 1.5em;
+    border-radius: 54px;
+    border: none;
+    cursor: pointer;
+    background-color:#BEDCFE ;
+  }
+  
+  .signUp_btn:hover,
+  .login_btn:hover {
+    transition: 1s;
+    transform: scale(1.2);
+    background-color:#C0D7BB ;
+  }
+  

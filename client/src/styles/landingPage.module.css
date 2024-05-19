@@ -42,19 +42,19 @@
     font-size: 104px;
     color: #85BDA6;
     grid-area: a; /* Assign to grid area 'a' */
-  
-  }
-  
-  .title:hover h1 {
-    cursor: pointer;
-    transition: 1.4s;
-    transform: scale(1.4s);
+    
   }
 
-  .title:hover::after h1{
-    transition: 1.2s;
+  .title h1{
+    transition: transform 1.3s;
     transform: scale(1);
   }
+
+  .title:hover h1{
+    cursor: pointer;
+    transform: scale(1.4);
+  }
+
   #splice{
     text-align: center;
     display: block;
@@ -66,15 +66,16 @@
     flex-direction: column;
     align-items: center;
     grid-area: b; /* Assign to grid area 'b' */
-    background-color: ghostwhite;
-    background: url('../assets/site-bkg.png') center/cover;
+    background: linear-gradient(to bottom, #3E885B, #85BDA6); /* Gradient background */
 
-  backdrop-filter: blur(5px); /* Apply blur effect to the background */
-  background-color: rgba(0, 0, 0, 0.774); /* Add some transparency to the background */
+ 
   }
 
   .landing_block{
-    background-color: black;
+    padding: 1.8em;
+    background-color: #2f4b26;
+    border-radius: 25px;
+    box-shadow: 2px 10px  #000000;
   }
   
   .landing_text {
@@ -86,6 +87,7 @@
    font-size: 4em;
    margin: 0.25em;
    color: #3E885B;
+
 
   }
 
@@ -111,12 +113,15 @@
     border-radius: 54px;
     border: none;
     cursor: pointer;
-    background-color:#BEDCFE ;
+    background-color:#85BDA6;
+    box-shadow: 2px 5px #c0d7bb5e;
+    transition: transform 1.3s;
+    transform: scale(1);
   }
   
   .signUp_btn:hover,
   .login_btn:hover {
-    transition: 1s;
+
     transform: scale(1.2);
     background-color:#C0D7BB ;
   }

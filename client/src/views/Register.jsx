@@ -154,7 +154,9 @@ function Register() {
                 <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    className={styles || !email ? styles.hide : styles.invalid}
+                    className={
+                      validEmail || !email ? styles.hide : styles.invalid
+                    }
                   />
                 </span>
               </label>
@@ -166,6 +168,7 @@ function Register() {
                 id={styles.signUp_input}
                 size={"45"}
                 onChange={(e) => setEmail(e.target.value)}
+                ref={userRef}
                 required
                 aria-invalid={validEmail ? styles.false : styles.true}
                 aria-describedby={styles.uidnote}
@@ -176,8 +179,8 @@ function Register() {
                 id={styles.uidnote}
                 className={
                   emailFocus && email && !validEmail
-                    ? "instructions"
-                    : "offscreen"
+                    ? styles.instructions
+                    : styles.offscreen
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
@@ -253,7 +256,7 @@ function Register() {
                 type="password"
                 name="signUp-labels-username"
                 placeholder="Password"
-                className="signUp-details-i"
+                className={styles.signUp_details_i}
                 id={styles.signUp_input_username}
                 size={"45"}
                 onChange={(e) => setPassword(e.target.value)}

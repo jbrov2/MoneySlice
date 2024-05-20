@@ -1,6 +1,7 @@
 /* eslint-disable no-constant-condition */
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
+import styles from "../styles/registerPage.module.css";
 
 import {
   faCheck,
@@ -130,30 +131,30 @@ function Register() {
   }
   return (
     <>
-      <div className="signUp-wrapper">
-        <div className="signUp-container">
-          <div className="create-account">
+      <div className={styles.signUp_wrapper}>
+        <div className={styles.signUp_container}>
+          <div className={styles.create_account}>
             <p
               ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
+              className={styles.errMsg ? styles.errMsg : styles.offscreen}
               aria-live="assertive"
             >
               {errMsg}
             </p>
-            <form onSubmit={submitHandler} className="signUp">
-              <h2 className="signUp-title">Register</h2>{" "}
-              <label htmlFor="signUp-labels" className="signUp-details">
+            <form onSubmit={submitHandler} className={styles.signUp}>
+              <h2 className={styles.signUp_title}>Register</h2>{" "}
+              <label htmlFor="signUp-labels" className={styles.signUp_details}>
                 Email
                 <span>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className={validEmail ? "valid" : "hide"}
+                    className={validEmail ? styles.valid : styles.hide}
                   />
                 </span>
-                <span className="icon-checker">
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    className={validEmail || !email ? "hide" : "invalid"}
+                    className={styles || !email ? styles.hide : styles.invalid}
                   />
                 </span>
               </label>
@@ -161,18 +162,18 @@ function Register() {
                 type="text"
                 name="signUp-labels"
                 placeholder="Username"
-                className="signUp-details-i"
-                id="signUp-input"
+                className={styles.signUpdetails_i}
+                id={styles.signUp_input}
                 size={"45"}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                aria-invalid={validEmail ? "false" : "true"}
-                aria-describedby="uidnote"
+                aria-invalid={validEmail ? styles.false : styles.true}
+                aria-describedby={styles.uid}
                 onFocus={() => setEmailFocus(true)}
                 onBlur={() => setEmailFocus(false)}
               />
               <p
-                id="uidnote"
+                id={styles.uid}
                 className={
                   emailFocus && email && !validEmail
                     ? "instructions"
@@ -182,18 +183,20 @@ function Register() {
                 <FontAwesomeIcon icon={faInfoCircle} />
                 Enter in your email address
               </p>
-              <label htmlFor="signUp-labels" className="signUp-details">
+              <label htmlFor="signUp-labels" className={styles.signUp_details}>
                 Username
                 <span>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className={validUserName ? "valid" : "hide"}
+                    className={validUserName ? styles.valid : styles.hide}
                   />
                 </span>
-                <span className="icon-checker">
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    className={validUserName || !userName ? "hide" : "invalid"}
+                    className={
+                      validUserName || !userName ? styles.hide : styles.invalid
+                    }
                   />
                 </span>
               </label>
@@ -201,23 +204,23 @@ function Register() {
                 type="text"
                 name="signUp-labels"
                 placeholder="Username"
-                className="signUp-details-i"
-                id="signUp-input"
+                className={styles.signUp_details_i}
+                id={styles.signUp_input}
                 size={"45"}
                 ref={userRef}
                 onChange={(e) => setUserName(e.target.value)}
                 required
-                aria-invalid={validUserName ? "false" : "true"}
+                aria-invalid={validUserName ? styles.false : styles.true}
                 aria-describedby="uidnote"
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}
               />
               <p
-                id="uidnote"
+                id={styles.uidnote}
                 className={
                   userFocus && userName && !validUserName
-                    ? "instructions"
-                    : "offscreen"
+                    ? styles.instructions
+                    : styles.offscreen
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
@@ -228,19 +231,21 @@ function Register() {
               </p>
               <label
                 htmlFor="signUp-labels-username"
-                className="signUp-details"
+                className={styles.signUp_details}
               >
                 Password
-                <span className="icon-checker">
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className={validPassword ? "valid" : "hide"}
+                    className={validPassword ? styles.valid : styles.hide}
                   />
                 </span>
-                <span className="icon-checker">
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faTimes}
-                    className={validPassword || !password ? "hide" : "invalid"}
+                    className={
+                      validPassword || !password ? styles.hide : styles.invalid
+                    }
                   />
                 </span>
               </label>
@@ -249,11 +254,11 @@ function Register() {
                 name="signUp-labels-username"
                 placeholder="Password"
                 className="signUp-details-i"
-                id="signUp-input-username"
+                id={styles.signUp_input_username}
                 size={"45"}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                aria-invalid={validPassword ? "false" : "true"}
+                aria-invalid={validPassword ? styles.false : styles.true}
                 aria-describedby="pwdnote"
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
@@ -261,7 +266,9 @@ function Register() {
               <p
                 id="pwdnote"
                 className={
-                  pwdFocus && !validPassword ? "instructions" : "offscreen"
+                  pwdFocus && !validPassword
+                    ? styles.instructions
+                    : styles.offscreen
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
@@ -277,20 +284,24 @@ function Register() {
               </p>
               <label
                 htmlFor="signUp-labels-password"
-                className="signUp-details"
+                className={styles.signUp_details}
               >
                 Confirm Password
-                <span className="icon-checker">
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className={validMatch && matchPassword ? "valid" : "hide"}
+                    className={
+                      validMatch && matchPassword ? styles.valid : styles.hide
+                    }
                   />
                 </span>
-                <span className="icon-checker">
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faTimes}
                     className={
-                      validMatch || !matchPassword ? "hide" : "invalid"
+                      validMatch || !matchPassword
+                        ? styles.hide
+                        : styles.invalid
                     }
                   />
                 </span>
@@ -299,20 +310,22 @@ function Register() {
                 type="password"
                 name="signUp-labels-password"
                 placeholder="Confirm Password"
-                className="signUp-details-i"
-                id="signUp-input-password"
+                className={styles.signUp_details_i}
+                id={styles.signUp_input_password}
                 size={"45"}
                 required
                 onChange={(e) => setMatchPassword(e.target.value)}
-                aria-invalid={validMatch ? "false" : "true"}
+                aria-invalid={validMatch ? styles.false : styles.true}
                 aria-describedby="confirmnote"
                 onFocus={() => setMatchFocus(true)}
                 onBlur={() => setMatchFocus(false)}
               />
               <p
-                id="confirmnote"
+                id={styles.confirmnote}
                 className={
-                  matchFocus && !validMatch ? "instructions" : "offscreen"
+                  matchFocus && !validMatch
+                    ? styles.instructions
+                    : styles.offscreen
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
@@ -322,15 +335,18 @@ function Register() {
                 disabled={
                   !validUserName || !validPassword || !validMatch ? true : false
                 }
-                className="signUp-button"
+                className={styles.signUp_button}
               >
                 SIGN UP
               </button>
             </form>{" "}
           </div>{" "}
-          <div className="welcome-back">
-            <h2 className="welcome-back-title">Welcome Back!</h2>
-            <button className="welcome-back-btn" onClick={loginPageHandler}>
+          <div className={styles.welcome_back}>
+            <h2 className={styles.welcome_back_title}>Welcome Back!</h2>
+            <button
+              className={styles.welcome_back_btn}
+              onClick={loginPageHandler}
+            >
               SIGN IN
             </button>
           </div>

@@ -114,14 +114,14 @@
     border: none;
     cursor: pointer;
     background-color:#85BDA6;
-    box-shadow: 2px 5px #c0d7bb5e;
+    
     transition: transform 1.3s;
     transform: scale(1);
   }
   
   .signUp_btn:hover,
   .login_btn:hover {
-
+box-shadow: 2px 5px #c0d7bb5e;
     transform: scale(1.2);
     background-color:#C0D7BB ;
   }

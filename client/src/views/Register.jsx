@@ -142,10 +142,10 @@ function Register() {
               {errMsg}
             </p>
             <form onSubmit={submitHandler} className={styles.signUp}>
-              <h2 className={styles.signUp_title}>Register</h2>{" "}
+              <h2 className={styles.signUp_title}>Sign Up</h2>{" "}
               <label htmlFor="signUp-labels" className={styles.signUp_details}>
                 Email
-                <span>
+                <span className={styles.icon_checker}>
                   <FontAwesomeIcon
                     icon={faCheck}
                     className={validEmail ? styles.valid : styles.hide}
@@ -161,19 +161,19 @@ function Register() {
               <input
                 type="text"
                 name="signUp-labels"
-                placeholder="Username"
-                className={styles.signUpdetails_i}
+                placeholder="Email"
+                className={styles.signUp_details_i}
                 id={styles.signUp_input}
                 size={"45"}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 aria-invalid={validEmail ? styles.false : styles.true}
-                aria-describedby={styles.uid}
+                aria-describedby={styles.uidnote}
                 onFocus={() => setEmailFocus(true)}
                 onBlur={() => setEmailFocus(false)}
               />
               <p
-                id={styles.uid}
+                id={styles.uidnote}
                 className={
                   emailFocus && email && !validEmail
                     ? "instructions"
@@ -264,7 +264,7 @@ function Register() {
                 onBlur={() => setPwdFocus(false)}
               />
               <p
-                id="pwdnote"
+                id={styles.pwdnote}
                 className={
                   pwdFocus && !validPassword
                     ? styles.instructions

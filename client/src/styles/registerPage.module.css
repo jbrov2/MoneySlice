@@ -1,5 +1,200 @@
+@font-face {
+    font-family:"Kanit", sans-serif ;
+    src: url('../assets/Kanit-Regular.ttf') format('truetype');
+  }
+
 *{
     margin: 0;
-    padding:0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+.signUp_wrapper{
+    background: linear-gradient(to top, #ffffff, #85BDA6);
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.signUp_container{
+
+    width: 65%; /* Adjusted width for better responsiveness */
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: minmax(100px,auto);
+    grid-template-areas: 
+    "wb wb su su su su"
+    "wb wb su su su su"
+    "wb wb su su su su";
+    align-items: center; /* Center items along the cross axis */
+    border-radius: 7px;
+    box-shadow: 0px 0px 5px black;
+    margin: 5em auto; 
+    margin-left: auto ;
+    margin-right: auto ;
+    border-radius: 70px;
+    height: 85%;
+}
+
+.create_account{
+    height: 100%;
+    grid-area: su;
+    background-color: #85BDA6;
+    border-radius: 0px 70px 70px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUp_title{
+    font-size: 48px;
+    font-family: "Kanit", sans-serif;
+    color: #FFFAFF;
+    text-align: center;
+    margin-top: 2em ;
+}
+
+.signUp_details{
+    font-family: "Mitr-Regular", Helvetica;
+    display: block;
+    margin: 2em 0em 0em 0em;
+    color: #FFFAFF;
+    font-size: 16px;
+    
+}
+
+.signUp_details_i{
+    display: block;
+    margin: 1em 0em 1em 0em;
+    padding: 1em 0em 1em 1em;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 2px 4px 2px #0000004a;
+}
+
+.signUp_button{
+    margin-bottom: 1.5em;
+    margin-top: 4em;
+    margin-left: 2.8em ;
+    font-family: "Mitr-Regular", Helvetica ;
+    font-size: 24px;
+    padding: 0.8em 3em 0.8em 3em;
+    border-radius: 70px;
+    border: none;
+    background-color: #303036;
+    color: #FFFAFF;
+    box-shadow: 2px 4px 2px #0000004a;
+}
+
+.signUp_button:hover{
+    transition: .5s;
+    background-color: #FFFAFF;
+    color: #303036;
+
+}
+
+.welcome_back{
+    height: 100%;
+    grid-area: wb;
+    background-color: #3E885B;
+    box-shadow: 0px 1px 10px #000000bd;
+    border-radius: 70px 0px 0px 70px;
+}
+
+
+.welcome_back_title{
+    font-size: 48px;
+    font-family: "Mitr-Regular", Helvetica;
+    color: #FFFAFF;
+    text-shadow: 5px 5px 4px #0000004a;
+    margin-top: 2em ;
+    text-align: center;
+}
+
+.welcome_back_btn{
+    margin-bottom: 1.5em;
+    margin-top: 11em;
+    margin-left: 8em ;
+    font-family: "Mitr-Regular", Helvetica ;
+    font-size: 24px;
+    padding: 0.8em 3em 0.8em 3em;
+    border-radius: 70px;
+    border: none;
+    background-color: #30BCED;
+    color: #FFFAFF;
+    box-shadow: 2px 4px 2px #0000004a;
+}
+
+.welcome_back_btn:hover{
+    transition: .5s;
+    color: #303036;
+    background-color: #FFFAFF;
+}
+
+#uidnote{
+    transition: .5s;
+    color: #FFFAFF;
+    font-family: "Mitr-Regular", Helvetica;
+    text-shadow: 2px 1px 1px  #30303649;
+    background-color: #3E885B;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 2px 4px 2px #30303670;
+    letter-spacing: normal;
+    line-height: 150%;
+}
+
+
+.errmsg {
+    background-color: lightpink;
+    color: #303036;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: #FFFAFF;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: #3E885B;
+    margin-left: 0.25rem;
+    
+}
+
+#pwdnote{
+    transition: .5s;
+    color: #FFFAFF;
+    font-family: "Mitr-Regular", Helvetica;
+    text-shadow: 2px 1px 1px  #30303649;
+    background-color: #3E885B;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 2px 4px 2px #30303670;
+    letter-spacing: normal;
+    line-height: 150%;
+}
+
+#confirmnote{
+    transition: .5s;
+    color: #FFFAFF;
+    font-family: "Mitr-Regular", Helvetica;
+    text-shadow: 2px 1px 1px  #30303649;
+    background-color: #303036;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 2px 4px 2px #30303670;
+    letter-spacing: normal;
+    line-height: 150%;
+}

@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Register() {
-  const REGISTER_URL = "/signUp";
+  const REGISTER_URL = "http://localhost:5000/signUp";
 
   const history = useNavigate();
 
@@ -84,28 +84,29 @@ function Register() {
       return;
     }
     try {
-      const reponse = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ userName, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(reponse.data);
-      console.log(reponse.accessToken);
-      setSuccess(true);
-    } catch (error) {
-      if (!error.response) {
-        setErrMsg("No Server Response");
-      } else if (error.response?.status === 409) {
-        setErrMsg("Username Taken");
+      const response = await fetch(REGISTER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, userName, password }),
+        // credentials: "include", include credentials if needed
+      });
+      if (response.status === 201) {
+        console.log("You have logged in");
+        setSuccess(true);
+        history("/home");
+      } else if (response.status === 409) {
+        setErrMsg("Username or Email is already taken");
       } else {
         setErrMsg("Registration Failed");
       }
-      errRef.current.focus();
+    } catch (error) {
+      setErrMsg("No server Response");
     }
+    errRef.current.focus();
   }
+
   return (
     <>
       <div className={styles.signUp_wrapper}>
@@ -319,6 +320,7 @@ function Register() {
                       : false
                   }
                   className={styles.signUp_button}
+                  onClick={submitHandler}
                 >
                   SIGN UP
                 </button>

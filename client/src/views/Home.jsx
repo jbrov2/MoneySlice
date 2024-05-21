@@ -13,7 +13,7 @@ function Home() {
   }
   return (
     <>
-      <h1>Welcome to MoneySlice {location.state.id}</h1>
+      <h1>Welcome to MoneySlice</h1>
       <h3>Would you like to create or view your budget</h3>
       <button onClick={handleViewPage}>View</button>
       <button onClick={handleCreatePage}>Create</button>

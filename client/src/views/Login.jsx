@@ -14,7 +14,7 @@ function Login() {
   const [userFocus, setUserFocus] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordFocus, setPasswordFocus] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+
   const LOGIN_URL = "http://localhost:5000/login";
 
   useEffect(() => {

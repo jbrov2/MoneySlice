@@ -14,6 +14,8 @@ function Login() {
   const [userFocus, setUserFocus] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordFocus, setPasswordFocus] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const LOGIN_URL = "http://localhost:5000/login";
 
   useEffect(() => {
     if (userRef.current) {
@@ -28,6 +30,26 @@ function Login() {
   async function submit(e) {
     e.preventDefault();
     // Handle form submission logic here
+    try {
+      const response = await fetch(LOGIN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName, password }),
+        // credentials: "include", include credentials if needed
+      });
+      if (response.status === 201) {
+        console.log("You have logged in");
+        history("/home");
+      } else if (response.status === 401) {
+        alert("Username or Password is incorrect");
+      } else {
+        alert("Login Failed");
+      }
+    } catch (error) {
+      alert("Server is currently unresponsive");
+    }
   }
 
   return (

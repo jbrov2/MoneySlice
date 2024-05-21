@@ -44,6 +44,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 7em;
 }
 
 .signUp_title{
@@ -70,24 +71,39 @@
     border-radius: 25px;
     border: none;
     box-shadow: 2px 4px 2px #0000004a;
+    transition: transform 1.3s;
+    transform: scale(1);
+}
+.signUp_details_i:hover{
+    transform: scale(1.1);
 }
 
+.signUp_details_i:focus{
+    box-shadow: 2px 5px #c0d7bb5e;
+    transform: scale(1.2);
+}
+
+.signbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
 .signUp_button{
-    margin-bottom: 1.5em;
+    /* margin-bottom: 1.5em;
     margin-top: 4em;
-    margin-left: 2.8em ;
+    margin-left: 2.8em ; */
     font-family: "Mitr-Regular", Helvetica ;
     font-size: 24px;
     padding: 0.8em 3em 0.8em 3em;
     border-radius: 70px;
     border: none;
-    background-color: #303036;
+    background-color: #2F4B26;
     color: #FFFAFF;
     box-shadow: 2px 4px 2px #0000004a;
 }
 
 .signUp_button:hover{
-    transition: .5s;
     background-color: #FFFAFF;
     color: #303036;
 
@@ -125,15 +141,26 @@
     padding: 0.8em 3em 0.8em 3em;
     border-radius: 70px;
     border: none;
-    background-color: #30BCED;
+    background-color: #85BDA6;
     color: #FFFAFF;
     box-shadow: 2px 4px 2px #0000004a;
 }
 
 .welcome_back_btn:hover{
-    transition: .5s;
+
     color: #303036;
     background-color: #FFFAFF;
+}
+
+.welcome_back_btn, .signUp_button {
+    transition: transform 1.3s;
+    transform: scale(1);
+}
+
+.welcome_back_btn:hover, .signUp_button:hover{
+    box-shadow: 2px 5px #c0d7bb5e;
+    transform: scale(1.2);
+    cursor: pointer;
 }
 
 #uidnote{
@@ -196,7 +223,7 @@
     color: #FFFAFF;
     font-family: "Mitr-Regular", Helvetica;
     text-shadow: 2px 1px 1px  #30303649;
-    background-color: #303036;
+    background-color: #3E885B;
     padding: 1em;
     border-radius: 5px;
     box-shadow: 2px 4px 2px #30303670;

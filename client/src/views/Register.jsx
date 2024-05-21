@@ -191,8 +191,6 @@ function Register() {
                 ref={userRef}
                 onChange={(e) => setUserName(e.target.value)}
                 required
-                aria-invalid={validUserName ? styles.false : styles.true}
-                aria-describedby="uidnote"
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}
               />
@@ -211,7 +209,7 @@ function Register() {
                 Letters, numbers, underscores, hyphens allowed.
               </p>
               <label
-                htmlFor="signUp-labels-username"
+                htmlFor="signUp_labels_username"
                 className={styles.signUp_details}
               >
                 Password

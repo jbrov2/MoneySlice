@@ -41,8 +41,6 @@ function Register() {
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
   //eror success messages
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -70,17 +68,12 @@ function Register() {
     setValidMatch(match);
   }, [password, matchPassword]);
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [email, userName, password, matchPassword]);
-
   async function submitHandler(e) {
     e.preventDefault();
     //if button is enabled using a java hack
     const v1 = USER_REGEX.test(userName);
     const v2 = PWD_REGEX.test(password);
     if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
       return;
     }
     try {
@@ -93,16 +86,16 @@ function Register() {
         // credentials: "include", include credentials if needed
       });
       if (response.status === 201) {
-        console.log("You have logged in");
-        setSuccess(true);
+        console.log("You have Signed in");
+
         history("/home");
       } else if (response.status === 409) {
-        setErrMsg("Username or Email is already taken");
+        alert("Username or email is currently in use");
       } else {
-        setErrMsg("Registration Failed");
+        alert("Registration Failed");
       }
     } catch (error) {
-      setErrMsg("No server Response");
+      alert("No server response");
     }
     errRef.current.focus();
   }
@@ -112,13 +105,6 @@ function Register() {
       <div className={styles.signUp_wrapper}>
         <div className={styles.signUp_container}>
           <div className={styles.create_account}>
-            <p
-              ref={errRef}
-              className={styles.errMsg ? styles.errMsg : styles.offscreen}
-              aria-live="assertive"
-            >
-              {errMsg}
-            </p>
             <form onSubmit={submitHandler} className={styles.signUp}>
               <h2 className={styles.signUp_title}>Sign Up</h2>{" "}
               <label htmlFor="signUp-labels" className={styles.signUp_details}>

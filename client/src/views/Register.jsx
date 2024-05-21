@@ -105,29 +105,6 @@ function Register() {
       }
       errRef.current.focus();
     }
-    // try {
-    //   await axios
-    //     .post("http://localhost:5000/signUp", {
-    //       email,
-    //       userName,
-    //       password,
-    //       valid,
-    //     })
-    //     .then((res) => {
-    //       // eslint-disable-next-line no-cond-assign
-    //       if (res.data === "exist") {
-    //         alert("User already exists");
-    //       } else if ((res.data = "does not exist")) {
-    //         history("/home", { state: { id: userName } });
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error:", error);
-    //       alert("Wrong details");
-    //     });
-    // } catch (e) {
-    //   console.log(e);
-    // }
   }
   return (
     <>
@@ -334,24 +311,30 @@ function Register() {
                 <FontAwesomeIcon icon={faInfoCircle} />
                 Must match the previous password you entered
               </p>
-              <button
-                disabled={
-                  !validUserName || !validPassword || !validMatch ? true : false
-                }
-                className={styles.signUp_button}
-              >
-                SIGN UP
-              </button>
+              <div className={styles.signbtn}>
+                <button
+                  disabled={
+                    !validUserName || !validPassword || !validMatch
+                      ? true
+                      : false
+                  }
+                  className={styles.signUp_button}
+                >
+                  SIGN UP
+                </button>
+              </div>
             </form>{" "}
           </div>{" "}
           <div className={styles.welcome_back}>
             <h2 className={styles.welcome_back_title}>Welcome Back!</h2>
-            <button
-              className={styles.welcome_back_btn}
-              onClick={loginPageHandler}
-            >
-              SIGN IN
-            </button>
+            <div className={styles.buttons}>
+              <button
+                className={styles.welcome_back_btn}
+                onClick={loginPageHandler}
+              >
+                LOG IN
+              </button>
+            </div>
           </div>
         </div>{" "}
       </div>

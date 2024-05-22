@@ -86,7 +86,7 @@ function Register() {
         // credentials: "include", include credentials if needed
       });
       if (response.status === 201) {
-        console.log("You have Signed in");
+        console.log("You have Registered in");
 
         history("/home");
       } else if (response.status === 409) {

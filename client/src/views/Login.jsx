@@ -39,7 +39,7 @@ function Login() {
         body: JSON.stringify({ userName, password }),
         // credentials: "include", include credentials if needed
       });
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log("You have logged in");
         history("/home");
       } else if (response.status === 401) {
@@ -55,10 +55,15 @@ function Login() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <section className={styles.loginHolder}>
-          <h1>Login</h1>
-          <form action="http://localhost:5000/login" method="POST">
-            <label htmlFor="login_Username" className={styles.signUp_details}>
+        <section className={styles.login_holder}>
+          <form
+            action="http://localhost:5000/login"
+            method="POST"
+            className={styles.login_form}
+          >
+            {" "}
+            <h1 className={styles.login_title}>Login</h1>
+            <label htmlFor="login_Username" className={styles.login_details}>
               Username
               <span>
                 <FontAwesomeIcon
@@ -78,6 +83,7 @@ function Login() {
               className={styles.input_style}
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
+              size={"45"}
             />
             <p
               id={styles.uidnote}
@@ -88,7 +94,7 @@ function Login() {
               <FontAwesomeIcon icon={faInfoCircle} />
               Please enter your user name
             </p>
-            <label htmlFor="login_password" className={styles.signUp_details}>
+            <label htmlFor="login_password" className={styles.login_details}>
               Password
               <span>
                 <FontAwesomeIcon
@@ -105,6 +111,7 @@ function Login() {
               name="login_password"
               required
               className={styles.input_style}
+              size={"45"}
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
             />
@@ -129,15 +136,15 @@ function Login() {
               </button>
             </div>
           </form>
-          <br />
-          <p>OR</p>
-          <br />
+        </section>
+        <div className={styles.signUp}>
+          <h1 className={styles.signUp_title}>Register</h1>
           <div className={styles.button}>
             <button onClick={signUpPageHandler} className={styles.signUp_btn}>
-              Sign Up Page
+              Register
             </button>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   );

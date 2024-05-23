@@ -27,8 +27,32 @@ function Home() {
             </h3>
             <h4>would you like to...</h4>
             <div className={styles.buttons}>
-              <button></button> <button></button> <button></button>
+              <button
+                className={styles.mainscreen_button}
+                id={styles.view_budget}
+              >
+                View
+              </button>{" "}
+              <button
+                className={styles.mainscreen_button}
+                id={styles.make_budget}
+              >
+                Make
+              </button>{" "}
+              <button
+                className={styles.mainscreen_button}
+                id={styles.edit_budget}
+              >
+                Edit
+              </button>{" "}
+              <button
+                className={styles.mainscreen_button}
+                id={styles.delete_budget}
+              >
+                Delete
+              </button>
             </div>
+            <h4>a budget?</h4>
           </section>
         </div>
       </div>

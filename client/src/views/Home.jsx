@@ -87,7 +87,12 @@ function Home() {
               <label htmlFor="radio_Logout">Logout</label>
             </div>
           </section>
-          <div className={styles.welcome_banner}></div>
+          <div className={styles.welcome_banner}>
+            {" "}
+            <h1 className={styles.h1_text}>
+              Welcome <span className={styles.userName}>X!</span>
+            </h1>
+          </div>
           <section className={styles.main_screen}>
             <h3>
               You currently have <span>X</span> <br></br> budgets available

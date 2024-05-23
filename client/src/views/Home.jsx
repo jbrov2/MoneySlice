@@ -61,30 +61,30 @@ function Home() {
               {/* Update Button */}
               <input
                 type="radio"
-                value="Home"
-                name="Home_button"
-                id="radio_Home"
+                value="Update"
+                name="Update_button"
+                id="radio_Update"
                 className="radio_button"
               />
-              <label htmlFor="radio_Home">Home</label>
+              <label htmlFor="radio_Update">Update</label>
               {/* Delete Button */}
               <input
                 type="radio"
-                value="Home"
-                name="Home_button"
-                id="radio_Home"
+                value="Delete"
+                name="Delete_button"
+                id="radio_Delete"
                 className="radio_button"
               />
+              <label htmlFor="radio_Delete">Delete</label>
               {/* Logout Button */}
-              <label htmlFor="radio_Home">Home</label>
               <input
                 type="radio"
-                value="Home"
-                name="Home_button"
-                id="radio_Home"
+                value="Logout"
+                name="Logout_button"
+                id="radio_Logout"
                 className="radio_button"
               />
-              <label htmlFor="radio_Home">Home</label>
+              <label htmlFor="radio_Logout">Logout</label>
             </div>
           </section>
           <div className={styles.welcome_banner}></div>

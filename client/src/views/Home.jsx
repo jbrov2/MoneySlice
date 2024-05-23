@@ -19,7 +19,74 @@ function Home() {
       <button onClick={handleCreatePage}>Create</button> */}
       <div className={styles.wrapper}>
         <div className={styles.main}>
-          <section className={styles.sidebar}></section>
+          <section className={styles.sidebar}>
+            <h2>MS</h2>
+            <div className={styles.selection}>
+              {/* Home Button */}
+              <input
+                type="radio"
+                value="Home"
+                name="Home_button"
+                id="radio_Home"
+                className="radio_button"
+              />
+              <label htmlFor="radio_Home">Home</label>
+              {/* Budget Button */}
+              <input
+                type="radio"
+                value="Budgets"
+                name="Budget_button"
+                id="radio_Budgets"
+                className="radio_button"
+              />
+              <label htmlFor="radio_Budgets">Budgets</label>
+              {/* View Button */}
+              <input
+                type="radio"
+                value="View"
+                name="View_button"
+                id="radio_View"
+                className="radio_button"
+              />
+              <label htmlFor="radio_View">View</label>
+              {/* Make Button */}
+              <input
+                type="radio"
+                value="Make"
+                name="Make_button"
+                id="radio_Make"
+                className="radio_button"
+              />
+              <label htmlFor="radio_Make">Make</label>
+              {/* Update Button */}
+              <input
+                type="radio"
+                value="Home"
+                name="Home_button"
+                id="radio_Home"
+                className="radio_button"
+              />
+              <label htmlFor="radio_Home">Home</label>
+              {/* Delete Button */}
+              <input
+                type="radio"
+                value="Home"
+                name="Home_button"
+                id="radio_Home"
+                className="radio_button"
+              />
+              {/* Logout Button */}
+              <label htmlFor="radio_Home">Home</label>
+              <input
+                type="radio"
+                value="Home"
+                name="Home_button"
+                id="radio_Home"
+                className="radio_button"
+              />
+              <label htmlFor="radio_Home">Home</label>
+            </div>
+          </section>
           <div className={styles.welcome_banner}></div>
           <section className={styles.main_screen}>
             <h3>

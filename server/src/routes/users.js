@@ -7,7 +7,7 @@ const User = require("../models/User");
 router.get("/info", async (req, res) => {
   try {
     const userName = req.user.userName;
-    const user = await User.findOne({ userName });
+    const user = await User.findOne({ userName }).exec();
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

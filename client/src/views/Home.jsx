@@ -8,13 +8,18 @@ function Home() {
   const [budgetCount, setBudgetCount] = useState(0);
 
   useEffect(() => {
+    //also grabbing the access token
     const fetchUserData = async () => {
       try {
+        //Get the accss token
+        const accessToken = sessionStorage.getItem("accessToken");
+        console.log(accessToken);
+        //now make the request
         const response = await fetch("http://localhost:5000/user/info", {
           method: "GET",
           headers: {
+            Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           // credentials: "include",
         });

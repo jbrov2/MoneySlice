@@ -40,6 +40,9 @@ function Login() {
         // credentials: "include", include credentials if needed
       });
       if (response.status === 200) {
+        const data = await response.json();
+        const accessToken = data.accessToken;
+        localStorage.setItem("accessToken", accessToken);
         console.log("You have logged in");
         history("/home");
       } else if (response.status === 401) {

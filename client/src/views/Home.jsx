@@ -12,7 +12,7 @@ function Home() {
     const fetchUserData = async () => {
       try {
         //Get the accss token
-        const accessToken = sessionStorage.getItem("accessToken");
+        const accessToken = localStorage.getItem("accessToken");
         console.log(accessToken);
         //now make the request
         const response = await fetch("http://localhost:5000/user/info", {
@@ -51,15 +51,16 @@ function Home() {
             <input
               type="radio"
               value="Home"
-              name="Home_button"
+              name="sidebar_button"
               id="radio_Home"
               className="radio_button"
+              checked
             />
             <label htmlFor="radio_Home">Home</label>
             <input
               type="radio"
               value="Budgets"
-              name="Budget_button"
+              name="sidebar_button"
               id="radio_Budgets"
               className="radio_button"
             />
@@ -67,7 +68,7 @@ function Home() {
             <input
               type="radio"
               value="View"
-              name="View_button"
+              name="sidebar_button"
               id="radio_View"
               className="radio_button"
             />
@@ -75,7 +76,7 @@ function Home() {
             <input
               type="radio"
               value="Make"
-              name="Make_button"
+              name="sidebar_button"
               id="radio_Make"
               className="radio_button"
             />
@@ -83,7 +84,7 @@ function Home() {
             <input
               type="radio"
               value="Update"
-              name="Update_button"
+              name="sidebar_button"
               id="radio_Update"
               className="radio_button"
             />
@@ -91,7 +92,7 @@ function Home() {
             <input
               type="radio"
               value="Delete"
-              name="Delete_button"
+              name="sidebar_button"
               id="radio_Delete"
               className="radio_button"
             />
@@ -99,7 +100,7 @@ function Home() {
             <input
               type="radio"
               value="Logout"
-              name="Logout_button"
+              name="sidebar_button"
               id="radio_Logout"
               className="radio_button"
             />

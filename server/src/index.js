@@ -9,9 +9,6 @@ const cookieParser = require("cookie-parser");
 const verifyJWT = require("./middleware/verifyJWT");
 const addAccessToken = require("./middleware/addAccessToken");
 //MODELS
-const Budget = require("./models/Budget");
-const User = require("./models/User");
-const { createRequire } = require("module");
 
 const url = process.env.MONGODB_URL;
 const PORT = 5000;
@@ -36,10 +33,12 @@ app.use(addAccessToken);
 
 app.use("/signUp", require("./routes/signUp"));
 app.use("/login", require("./routes/auth"));
+
 app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 
 app.use(verifyJWT);
+app.use("/user", require("./routes/users"));
 app.use("/budget", require("./routes/budget"));
 app.get("/login", cors(), (req, res) => {});
 // app.post("/login", async (req, res) => {

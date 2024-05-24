@@ -35,6 +35,8 @@ const handleLogin = async (req, res) => {
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict", //prevents Cross-Site Request Forgery
     });
     res.json({ accessToken });
   } else {

@@ -1,3 +1,8 @@
+@font-face {
+    font-family:"Kanit", sans-serif ;
+    src: url('../assets/Kanit-Regular.ttf') format('truetype');
+  }
+
 *{
     margin: 0;
     padding: 0;
@@ -25,5 +30,47 @@
 }
 
 .sidebar{
-    
+    grid-area: sidebar;
+    height: 100vh;
+    background-color: #2F4B26;
+
+}
+
+.selection{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.links{
+    list-style: none;
+    padding: 2em;
+    color: #ffffff;
+}
+
+#static{
+    color: #3e885b;
+}
+
+.links:hover{
+    transition: .5s;
+    color:#85bda6;
+    cursor: pointer;
+}
+
+#logout_link{
+    padding-top:12em;
+}
+
+#logout_link:hover{
+    color: #C0D7BB;
+}
+
+
+.welcome_banner{
+    grid-area: header;
+}
+
+.main_screen{
+    grid-area:main;
 }

@@ -11,6 +11,9 @@ import {
 import LandingPage from "./views/landingPage";
 import CreateAPie from "./views/createBudget";
 import ViewAPie from "./views/viewBudget";
+// Supports weights 100-800
+import "@fontsource-variable/sora";
+import "@fontsource/krona-one";
 
 function App() {
   return (

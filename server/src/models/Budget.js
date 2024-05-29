@@ -39,6 +39,13 @@ BudgetSchema.pre("save", function (next) {
   }, 0);
   this.Remaining_Budget = this.Budgeted_Amount - this.Actual_Spending;
 
+  //auto generating ids
+  this.Item.forEach((item, index) => {
+    if (!item.ID) {
+      item.ID = index + 1;
+    }
+  });
+
   next();
 });
 

@@ -1,7 +1,7 @@
 function Logout() {
   return (
     <>
-      <h1>Hello</h1>
+      <h1>Hellos</h1>
     </>
   );
 }

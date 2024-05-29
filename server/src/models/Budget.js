@@ -49,6 +49,7 @@ BudgetSchema.pre("save", function (next) {
   next();
 });
 
-const BudgetModel = mongoose.model("Budget", BudgetSchema);
+const BudgetModel =
+  mongoose.model("Budget", BudgetSchema) || mongoose.models.Budget;
 
 module.exports = { BudgetModel };

@@ -1,4 +1,5 @@
 const UserModel = require("../models/User");
+const BudgetModel = require("../models/Budget");
 const mongoose = require("mongoose");
 
 const getAllBudgets = async (req, res) => {

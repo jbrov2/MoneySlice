@@ -21,6 +21,7 @@ const UserSchema = new Schema({
   refreshToken: String,
 });
 
-const UserModel = mongoose.model("User", UserSchema);
+const UserModel =
+  mongoose.model("User", UserSchema) || mongoose.model("User", UserSchema);
 
 module.exports = UserModel;

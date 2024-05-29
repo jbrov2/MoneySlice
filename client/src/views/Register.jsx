@@ -87,7 +87,10 @@ function Register() {
       });
       if (response.status === 201) {
         console.log("You have Registered in");
-
+        const data = await response.json();
+        const accessToken = data.accessToken;
+        localStorage.setItem("accessToken", accessToken);
+        console.log("You have logged in");
         history("/home");
       } else if (response.status === 409) {
         alert("Username or email is currently in use");
@@ -105,7 +108,12 @@ function Register() {
       <div className={styles.signUp_wrapper}>
         <div className={styles.signUp_container}>
           <div className={styles.create_account}>
-            <form onSubmit={submitHandler} className={styles.signUp}>
+            <form
+              onSubmit={submitHandler}
+              action="http://localhost:5000/signUp"
+              method="POST"
+              className={styles.signUp}
+            >
               <h2 className={styles.signUp_title}>Sign Up</h2>{" "}
               <label htmlFor="signUp-labels" className={styles.signUp_details}>
                 Email

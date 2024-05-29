@@ -1,6 +1,5 @@
 const UserModel = require("../models/User");
 const BudgetModel = require("../models/Budget");
-const mongoose = require("mongoose");
 
 const getAllBudgets = async (req, res) => {
   try {
@@ -24,24 +23,33 @@ const createNewBudget = async (req, res) => {
     const userName = req.user.userName; // Access userId from req.user
     const user = await UserModel.findOne({ userName });
 
-    //checking if the user is found
+    // Check if the user is found
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
+    // Extract data from request body
+    const { Category, Budgeted_Amount, Actual_Spending, Item } = req.body;
+
     // Create a new budget and associate it with the current user
     const newBudget = new BudgetModel({
-      Category: req.body.Category,
-      Budgeted_Amount: req.body.Budgeted_Amount,
-      User: user.userName,
-      Item: req.body.item,
+      Category,
+      Budgeted_Amount,
+      Actual_Spending,
+      User: user._id,
+      Item: Item.map((item, index) => ({
+        Name: item.Name,
+        Amount_Spent: item.Amount_Spent,
+        ID: item.ID || index + 1,
+      })),
     });
 
     await newBudget.save();
 
     user.AssignedBudgets.push(newBudget._id);
-
     await user.save();
 
+    res.json(newBudget);
     console.log("Budget has been created");
   } catch (error) {
     console.error(error);
@@ -51,31 +59,47 @@ const createNewBudget = async (req, res) => {
 
 const updateBudget = async (req, res) => {
   try {
-    //verify the user
-    const userName = req.user.userName; //Grabbing username from the req
-    const user = await UserModel.findOne({ userName }); //grabbing username from db
+    // Verify the user
+    const userName = req.user.userName; // Grabbing username from the req
+    const user = await UserModel.findOne({ userName }); // Grabbing username from db
 
-    //checking for user
+    // Checking for user
     if (!user) {
-      return res.sendStatus(404).json({ message: "user has not been found" });
+      return res.status(404).json({ message: "User has not been found" });
     }
-    //Grabbing the Category, Budgeted_Amount, and the Actual_Spending
-    const { Category, Budgeted_Amount, Actual_Spending } = req.body;
 
-    //Find the budget by Category and User
-    const budget = await BudgetModel.findone({ Category, User: user._id });
-    //updating
-    budget.budgets[editBudgetIndex].Budgeted_Amount = Budgeted_Amount;
-    budget.budgets[editBudgetIndex].Actual_Spending = Actual_Spending;
-    budget.budgets[editBudgetIndex].Remaining_Budget =
-      Budgeted_Amount - Actual_Spending;
+    // Grabbing the Category, Budgeted_Amount, Actual_Spending, and Items
+    const { Category, Budgeted_Amount, Actual_Spending, Item } = req.body;
 
+    // Find the budget by Category and User
+    const budget = await BudgetModel.findOne({ Category, User: user._id });
+
+    if (!budget) {
+      return res.status(404).json({ message: "Budget has not been found" });
+    }
+
+    // Updating budget fields
+    budget.Budgeted_Amount = Budgeted_Amount;
+    budget.Actual_Spending = Actual_Spending;
+    budget.Remaining_Budget = Budgeted_Amount - Actual_Spending;
+
+    // Updating Items section
     if (Item && Array.isArray(Item)) {
-      budget.Item = Item.map((item, index));
+      // Clear existing items
+      budget.Item = [];
+      // Add new items
+      Item.forEach((item, index) => {
+        budget.Item.push({
+          Name: item.Name,
+          Amount_Spent: item.Amount_Spent,
+          ID: item.ID || index + 1,
+        });
+      });
     }
 
-    //save budget
+    // Save updated budget
     await budget.save();
+
     res.json(budget);
     console.log("Budget has been updated");
   } catch (error) {
@@ -86,24 +110,30 @@ const updateBudget = async (req, res) => {
 
 const deleteBudget = async (req, res) => {
   try {
-    //verify the user
+    // Verify the user
     const userName = req.user.userName;
-    const user = await UserModel.findOne({ userName }); //grabbing username from db
-    //grab the category name that the user wants to delete
+    const user = await UserModel.findOne({ userName }); // Grabbing username from db
+
+    // Grab the category name that the user wants to delete
     const { Category } = req.body;
-    //checking for the user
-    if (!user)
-      return res.sendStatus(404).json({ message: "User is not found" });
 
-    const result = await UserModel.updateOne(
-      { userName: userName },
-      { $pull: { budgets: { Category: Category } } }
-    );
+    // Checking for the user
+    if (!user) {
+      return res.status(404).json({ message: "User is not found" });
+    }
 
-    //Check if any docs were modified
-    if (result.nModified === 0) {
+    const budget = await BudgetModel.findOneAndDelete({
+      Category,
+      User: user._id,
+    });
+
+    if (!budget) {
       return res.status(404).json({ message: "Budget not found for deletion" });
     }
+
+    // Remove the budget from the user's AssignedBudgets array
+    user.AssignedBudgets.pull(budget._id);
+    await user.save();
 
     res.json({ message: "Budget was deleted successfully" });
   } catch (error) {

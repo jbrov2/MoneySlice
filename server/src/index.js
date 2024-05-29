@@ -62,53 +62,6 @@ app.get("/signUp", (req, res) => {
   res.send("Welcome to the signUp page");
 });
 
-// app.post("/signUp", async (req, res) => {
-//   const { email, userName, password } = req.body;
-
-//   const newUser = new Login({
-//     email: email,
-//     userName: userName,
-//     password: password,
-//   });
-
-//   try {
-//     const existingUser = await Login.findOne({ email });
-
-//     if (existingUser) {
-//       return res.json("This user exists");
-//     } else {
-//       await newUser.save();
-//       res.json("Made new user");
-//       console.log("User has been created");
-//     }
-//   } catch (error) {
-//     console.error("Error creating user:", error);
-//     res.status(500).json("Internal Server Error");
-//   }
-
-//   // const newRegister = new Register({
-//   //   email: req.body.email,
-//   //   userName: req.body.userName,
-//   //   password: req.body.password,
-//   //   valid_password: req.body.valid_password,
-//   // });
-
-//   // const createdRegister = await newRegister.save();
-//   // res.json(createdRegister);
-// });
-
-// app.post("/budget", async (req, res) => {
-//   console.log(req.body);
-//   const newBudget = new Budget({
-//     Category: req.body.Category,
-//     Budgeted_Amount: req.body.Budgeted_Amount,
-//     Actual_Spending: req.body.Actual_Spending,
-//     Remaining_Budget: req.body.Remaining_Budget,
-//   });
-//   const createdBudget = await newBudget.save();
-//   res.json(createdBudget);
-// });
-
 mongoose.connect(url).then(() => {
   app.listen(PORT, () => {
     console.log(

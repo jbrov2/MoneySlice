@@ -13,10 +13,13 @@ router.get("/info", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    //Count the number of budgets associated with the user
+    const budgetCount = user.AssignedBudgets.length;
+
     //Return the user's username and the budget count will upgrade later
     res.json({
       userName: user.userName,
-      budgetCount: user.budgets.length,
+      budgetCount: budgetCount,
     });
   } catch (error) {
     console.error("Error fetching user data:", error);

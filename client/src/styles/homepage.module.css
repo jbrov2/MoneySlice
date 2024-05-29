@@ -1,7 +1,4 @@
-@font-face {
-    font-family:"Kanit", sans-serif ;
-    src: url('../assets/Kanit-Regular.ttf') format('truetype');
-  }
+
 
 *{
     margin: 0;
@@ -43,13 +40,19 @@
 }
 
 .links{
+    font-family: "Kanit", sans-serif;
     list-style: none;
     padding: 2em;
     color: #ffffff;
+    font-family: 'Sora Variable', sans-serif;
 }
 
 #static{
     color: #3e885b;
+}
+
+#static:hover{
+    cursor: default;
 }
 
 .links:hover{
@@ -59,7 +62,7 @@
 }
 
 #logout_link{
-    padding-top:12em;
+    margin-top:12em;
 }
 
 #logout_link:hover{
@@ -69,8 +72,79 @@
 
 .welcome_banner{
     grid-area: header;
+    padding-left: 4em ;
+    font-family: 'Krona One', sans-serif;
+    display: flex;
+    justify-content: start;
+}
+
+.userName{
+    color: #3E885B;
 }
 
 .main_screen{
+    font-family: 'Sora Variable', sans-serif;
     grid-area:main;
+    height: 80vh;
+}
+
+.main_hero_text{
+    display: flex;
+    margin-left: 4em ;
+}
+
+h3{
+    font-size: 2em;
+}
+
+
+.mainscreen_subtext{
+    font-size: 2em;
+    margin-top: 6em;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    margin: 4em;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainscreen_button{
+    margin-right: 2em;
+    padding: 0.8em 2em 0.8em 2em;
+    border: none;
+    border-radius: 35px;
+    font-family: 'Sora Variable', sans-serif;
+    font-size: 1em;
+    transition: transform 1.3s;
+    transform: scale(1);
+}
+
+.mainscreen_button:hover{
+    cursor: pointer;
+    transition: .5s;
+    background-color: #BEDCFE;
+    transform: scale(1.1);
+}
+
+.budgetCount{
+    color:#3E885B
+}
+
+.after_button{
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+}
+
+.logo{
+    font-family: 'Krona One', sans-serif;
+    margin: 2em;
+    font-size: 1em;
+    color: #ffffff;
+    cursor:default;
 }

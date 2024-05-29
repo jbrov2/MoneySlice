@@ -48,63 +48,23 @@ function Home() {
         <section className={styles.sidebar}>
           <h2>MS</h2>
           <div className={styles.selection}>
-            <input
-              type="radio"
-              value="Home"
-              name="sidebar_button"
-              id="radio_Home"
-              className="radio_button"
-              checked
-            />
-            <label htmlFor="radio_Home">Home</label>
-            <input
-              type="radio"
-              value="Budgets"
-              name="sidebar_button"
-              id="radio_Budgets"
-              className="radio_button"
-            />
-            <label htmlFor="radio_Budgets">Budgets</label>
-            <input
-              type="radio"
-              value="View"
-              name="sidebar_button"
-              id="radio_View"
-              className="radio_button"
-            />
-            <label htmlFor="radio_View">View</label>
-            <input
-              type="radio"
-              value="Make"
-              name="sidebar_button"
-              id="radio_Make"
-              className="radio_button"
-            />
-            <label htmlFor="radio_Make">Make</label>
-            <input
-              type="radio"
-              value="Update"
-              name="sidebar_button"
-              id="radio_Update"
-              className="radio_button"
-            />
-            <label htmlFor="radio_Update">Update</label>
-            <input
-              type="radio"
-              value="Delete"
-              name="sidebar_button"
-              id="radio_Delete"
-              className="radio_button"
-            />
-            <label htmlFor="radio_Delete">Delete</label>
-            <input
-              type="radio"
-              value="Logout"
-              name="sidebar_button"
-              id="radio_Logout"
-              className="radio_button"
-            />
-            <label htmlFor="radio_Logout">Logout</label>
+            <div className={styles.sidescreen_links}>
+              <ul>
+                <li className={styles.links}>Home</li>
+                <li className={styles.links} id={styles.static}>
+                  Budgets
+                </li>
+                <li className={styles.links} id={styles.chosen_link}>
+                  View
+                </li>
+                <li className={styles.links}>Make</li>
+                <li className={styles.links}>Update</li>
+                <li className={styles.links}>Delete</li>
+                <li className={styles.links} id={styles.logout_link}>
+                  Logout
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
         <div className={styles.welcome_banner}>

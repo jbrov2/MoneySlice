@@ -16,12 +16,15 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  AssignedBudgets: [{ type: Schema.Types.ObjectId, ref: "Budget" }],
-
+  AssignedBudgets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Budget",
+    },
+  ],
   refreshToken: String,
 });
 
-const UserModel =
-  mongoose.model("User", UserSchema) || mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 
 module.exports = UserModel;

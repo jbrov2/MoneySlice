@@ -1,17 +1,13 @@
 const mongoose = require("mongoose");
-
-const User = require("./User");
-
 const Schema = mongoose.Schema;
-// const ObjectId = Schema.ObjectId;
 
 const BudgetSchema = new Schema({
-  Category: { type: String, required: true, unique: true },
+  Category: { type: String, required: true },
   Item: [
     {
       Name: { type: String, required: true },
       Amount_Spent: { type: Number, required: true },
-      ID: { type: Number, required: true },
+      ID: { type: Number },
     },
   ],
   Budgeted_Amount: Number,
@@ -19,7 +15,7 @@ const BudgetSchema = new Schema({
   Remaining_Budget: {
     type: Number,
     default: function () {
-      //Set default value to Budgeted Amount if not provided
+      // Set default value to Budgeted Amount if not provided
       return this.Budgeted_Amount || 0;
     },
   },
@@ -28,18 +24,19 @@ const BudgetSchema = new Schema({
     ref: "User",
     required: true,
   },
-  // id: mongoose.Schema.Types.ObjectId,
 });
 
-//Pre-save hook to calculate actual spending
+// Pre-save hook to calculate actual spending and auto-generate item IDs
 BudgetSchema.pre("save", function (next) {
-  //Calculate the sum of Amount_Spent in the Item Array
+  // Calculate the sum of Amount_Spent in the Item array
   this.Actual_Spending = this.Item.reduce((total, item) => {
     return total + item.Amount_Spent;
   }, 0);
+
+  // Calculate Remaining_Budget
   this.Remaining_Budget = this.Budgeted_Amount - this.Actual_Spending;
 
-  //auto generating ids
+  // Auto-generate IDs for items if not already present
   this.Item.forEach((item, index) => {
     if (!item.ID) {
       item.ID = index + 1;
@@ -49,7 +46,6 @@ BudgetSchema.pre("save", function (next) {
   next();
 });
 
-const BudgetModel =
-  mongoose.model("Budget", BudgetSchema) || mongoose.models.Budget;
+const BudgetModel = mongoose.model("Budget", BudgetSchema);
 
-module.exports = { BudgetModel };
+module.exports = BudgetModel;

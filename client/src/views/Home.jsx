@@ -39,28 +39,52 @@ function Home() {
     fetchUserData();
   }, []);
 
+  const handleHomePage = () => navigate("/home");
   const handleCreatePage = () => navigate("/createAPie");
   const handleViewPage = () => navigate("/viewAPie");
+  const handleUpdatePage = () => navigate("/updateApie");
+  const handleDeletePage = () => navigate("/smashAPie");
+  const handleLogout = () => navigate("/logout");
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
         <section className={styles.sidebar}>
-          <h2>MS</h2>
+          <div className={styles.logo}>
+            <h2>MS</h2>
+          </div>
+
           <div className={styles.selection}>
             <div className={styles.sidescreen_links}>
               <ul>
-                <li className={styles.links}>Home</li>
+                <li className={styles.links} onClick={handleHomePage}>
+                  Home
+                </li>
                 <li className={styles.links} id={styles.static}>
                   Budgets
                 </li>
-                <li className={styles.links} id={styles.chosen_link}>
+                <li
+                  className={styles.links}
+                  id={styles.chosen_link}
+                  onClick={handleViewPage}
+                >
                   View
                 </li>
-                <li className={styles.links}>Make</li>
-                <li className={styles.links}>Update</li>
-                <li className={styles.links}>Delete</li>
-                <li className={styles.links} id={styles.logout_link}>
+                <li className={styles.links} onClick={handleCreatePage}>
+                  {" "}
+                  Make
+                </li>
+                <li className={styles.links} onClick={handleUpdatePage}>
+                  Update
+                </li>
+                <li className={styles.links} onClick={handleDeletePage}>
+                  Delete
+                </li>
+                <li
+                  className={styles.links}
+                  id={styles.logout_link}
+                  onClick={handleLogout}
+                >
                   Logout
                 </li>
               </ul>
@@ -69,14 +93,20 @@ function Home() {
         </section>
         <div className={styles.welcome_banner}>
           <h1 className={styles.h1_text}>
-            Welcome <span className={styles.userName}>{userName}!</span>
+            Welcome <span className={styles.userName}>{userName}</span>!
           </h1>
         </div>
         <section className={styles.main_screen}>
-          <h3>
-            You currently have <span>{budgetCount}</span> budgets available
-          </h3>
-          <h4>Would you like to...</h4>
+          <div className={styles.main_hero_text}>
+            <h3>
+              You currently have{" "}
+              <span className={styles.budgetCount}>{budgetCount}</span> budgets
+              available
+            </h3>
+          </div>
+          <div className={styles.mainscreen_subtext}>
+            <h4>Would you like to...</h4>
+          </div>
           <div className={styles.buttons}>
             <button
               className={styles.mainscreen_button}
@@ -90,10 +120,22 @@ function Home() {
             >
               Make
             </button>
-            <button className={styles.mainscreen_button}>Edit</button>
-            <button className={styles.mainscreen_button}>Delete</button>
+            <button
+              className={styles.mainscreen_button}
+              onClick={handleUpdatePage}
+            >
+              Edit
+            </button>
+            <button
+              className={styles.mainscreen_button}
+              onClick={handleDeletePage}
+            >
+              Delete
+            </button>
           </div>
-          <h4>a budget?</h4>
+          <div className={styles.after_button}>
+            <h4>a budget?</h4>
+          </div>
         </section>
       </div>
     </div>

@@ -5,11 +5,13 @@ const mongoose = require("mongoose");
 const getAllBudgets = async (req, res) => {
   try {
     const userName = req.user.userName;
-    const user = await UserModel.findOne({ userName });
+    const user = await UserModel.findOne({ userName }).populate(
+      "AssignedBudgets"
+    );
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.json(user.budgets);
+    res.json(user.AssignedBudgets);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to retrieve budgets" });
@@ -27,15 +29,19 @@ const createNewBudget = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     // Create a new budget and associate it with the current user
-    const newBudget = {
+    const newBudget = new BudgetModel({
       Category: req.body.Category,
       Budgeted_Amount: req.body.Budgeted_Amount,
-      Actual_Spending: req.body.Actual_Spending,
-    };
+      User: user.userName,
+      Item: req.body.item,
+    });
 
-    user.budgets.push(newBudget);
+    await newBudget.save();
+
+    user.AssignedBudgets.push(newBudget._id);
+
     await user.save();
-    res.json(newBudget);
+
     console.log("Budget has been created");
   } catch (error) {
     console.error(error);
@@ -56,23 +62,21 @@ const updateBudget = async (req, res) => {
     //Grabbing the Category, Budgeted_Amount, and the Actual_Spending
     const { Category, Budgeted_Amount, Actual_Spending } = req.body;
 
-    //checks the index of the element and tries to find a matching Category, if not it returns -1
-    const editBudgetIndex = user.budgets.findIndex(
-      (budget) => budget.Category === Category
-    );
-
-    if (editBudgetIndex === -1) {
-      return res.status(404).json({ message: "Budget has not been found" });
-    }
+    //Find the budget by Category and User
+    const budget = await BudgetModel.findone({ Category, User: user._id });
     //updating
-    user.budgets[editBudgetIndex].Budgeted_Amount = Budgeted_Amount;
-    user.budgets[editBudgetIndex].Actual_Spending = Actual_Spending;
-    user.budgets[editBudgetIndex].Remaining_Budget =
+    budget.budgets[editBudgetIndex].Budgeted_Amount = Budgeted_Amount;
+    budget.budgets[editBudgetIndex].Actual_Spending = Actual_Spending;
+    budget.budgets[editBudgetIndex].Remaining_Budget =
       Budgeted_Amount - Actual_Spending;
 
+    if (Item && Array.isArray(Item)) {
+      budget.Item = Item.map((item, index));
+    }
+
     //save budget
-    await user.save();
-    res.json(user.budgets[editBudgetIndex]);
+    await budget.save();
+    res.json(budget);
     console.log("Budget has been updated");
   } catch (error) {
     console.error(error);

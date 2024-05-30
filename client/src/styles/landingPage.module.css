@@ -25,7 +25,6 @@
   }
   
   .title {
-
     font-family: 'Krona One', sans-serif;
     font-style: normal;
     background-color: #2F4B26;
@@ -38,12 +37,12 @@
     
   }
 
-  .title h1{
+  .title p{
     transition: transform 1.3s;
     transform: scale(1);
   }
 
-  .title:hover h1{
+  .title:hover p{
     cursor: pointer;
     transform: scale(1.4);
   }
@@ -72,7 +71,7 @@
   }
   
   .landing_text {
-    font-family: 'Sora Variable', sans-serif;
+  font-family: 'Sora Variable', sans-serif;
    display: flex;
    justify-content: center;
    align-items: center;

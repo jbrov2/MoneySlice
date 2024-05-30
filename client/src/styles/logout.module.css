@@ -31,7 +31,7 @@
     justify-content: center;
 }
 
-h1{
+.header h1{
     font-family: 'Krona One', sans-serif;
     font-size: 42px;
     color: #2F4B26;

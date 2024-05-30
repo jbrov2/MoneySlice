@@ -16,9 +16,9 @@ function LandingPage() {
     <div className={styles.wrapper}>
       <section className={styles.main}>
         <div className={styles.title}>
-          <h1>
+          <p>
             Money <span id={styles.splice}>Slice</span>
-          </h1>
+          </p>
         </div>
         <div className={styles.landing}>
           <div className={styles.landing_block}>

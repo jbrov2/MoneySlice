@@ -1,50 +1,91 @@
-import "../styles/createABudget.css";
+import styles from "../styles/createABudget.module.css";
+import { useNavigate } from "react-router-dom";
+import { Chart as ChartJs } from "chart.js/auto";
+import { Pie } from "react-chartjs-2";
+import { useState } from "react";
 
 function CreateAPie() {
-  function prevSlideHandler() {}
-  function nextSlideHandler() {}
+  const navigate = useNavigate();
+
+  const handleHomePage = () => navigate("/home");
+  const handleCreatePage = () => navigate("/createAPie");
+  const handleViewPage = () => navigate("/viewAPie");
+  const handleUpdatePage = () => navigate("/updateApie");
+  const handleDeletePage = () => navigate("/smashAPie");
+  const handleLogout = () => navigate("/logout");
+
+  const [category, setCategory] = useState("");
+  const [budgetAmount, setBudgetAmount] = useState();
+  const [itemName, setItemName] = useState("");
+  const [itemAmountSpent, setItemAmountSpent] = useState();
 
   return (
     <>
-      <header className="header">
-        <nav className="navbar">
-          <ul className="nav-menu">
-            <li className="nav-item" id="services">
-              Services
-            </li>
-            <li className="nav-item" id="Logo">
-              Money Slice
-            </li>
-            <li className="nav-item" id="logout-btn">
-              Logout
-            </li>
-          </ul>
-          <div className="hamburger">
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
+      <div className={styles.wrapper}>
+        <div className={styles.main}>
+          <section className={styles.sidebar}>
+            <div className={styles.logo}>
+              <h2>MS</h2>
+            </div>
+
+            <div className={styles.selection}>
+              <div className={styles.sidescreen_links}>
+                <ul>
+                  <li className={styles.links} onClick={handleHomePage}>
+                    Home
+                  </li>
+                  <li className={styles.links} id={styles.static}>
+                    Budgets
+                  </li>
+                  <li
+                    className={styles.links}
+                    id={styles.chosen_link}
+                    onClick={handleViewPage}
+                  >
+                    View
+                  </li>
+                  <li className={styles.links} onClick={handleCreatePage}>
+                    {" "}
+                    Make
+                  </li>
+                  <li className={styles.links} onClick={handleUpdatePage}>
+                    Update
+                  </li>
+                  <li className={styles.links} onClick={handleDeletePage}>
+                    Delete
+                  </li>
+                  <li
+                    className={styles.links}
+                    id={styles.logout_link}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <div className={styles.welcome_banner}>
+            <h1 className={styles.h1_text}>
+              Welcome to{" "}
+              <span className={styles.custom_text}>Create a Pie</span>!
+            </h1>
           </div>
-        </nav>
-      </header>
-      <div>
-        <h1>Welcome to Create a Pie</h1>
-        <p>
-          This is where you can create the budget pie chart you want to follow
-        </p>
-        <h3>Let us start by choosing a guideline budget you want to follow</h3>
-        <div className="slider">
-          <div className="slide">
-            <h3 className="budget-name">50/30/20</h3>
-            <h3 className="budget-name">Spending Cap</h3>
-            <h3 className="budget-name">Zero Based</h3>
-            <h3 className="budget-name">Custom</h3>
-          </div>
-          <button className="prev" onClick={prevSlideHandler}>
-            &#10094
-          </button>
-          <button className="next" onClick={nextSlideHandler}>
-            &#10095
-          </button>
+          <section className={styles.chart_area}>
+            <div className={styles.PieChart}>
+              {/* <Pie
+                data={{
+                  labels: ["A", "B", "C"],
+                  datasets: [
+                    {
+                      label: "Revenue",
+                      data: [200, 300, 400],
+                    },
+                  ],
+                }}
+              /> */}
+            </div>
+          </section>
         </div>
       </div>
     </>

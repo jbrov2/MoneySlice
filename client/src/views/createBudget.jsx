@@ -219,11 +219,35 @@ function CreateAPie() {
                 <p className={styles.questions}>
                   {questions[step]?.question || ""}
                 </p>
-                {step < 4 && (
+                {step === 0 && ( // Check if step is 0 (for capturing the category name)
                   <input
-                    type={step === 1 || step === 3 ? "number" : "text"}
-                    value={questions[step]?.value || ""}
-                    onChange={(e) => questions[step]?.setter(e.target.value)}
+                    type="text" // Input type for category name
+                    value={Category} // Bind the input value to the Category state
+                    onChange={(e) => setCategory(e.target.value)} // Update the Category state on change
+                    className={styles.inputs}
+                  />
+                )}
+                {step === 1 && ( // Check if step is 1 (for capturing the budget amount)
+                  <input
+                    type="number" // Ensure the input type is set to "number" for numerical input
+                    value={Budget_Amount} // Bind the input value to the Budget_Amount state
+                    onChange={(e) => setBudgetAmount(e.target.value)} // Update the Budget_Amount state on change
+                    className={styles.inputs}
+                  />
+                )}
+                {step === 2 && ( // Check if step is 2 (for capturing the item name)
+                  <input
+                    type="text" // Input type for item name
+                    value={itemName} // Bind the input value to the itemName state
+                    onChange={(e) => setItemName(e.target.value)} // Update the itemName state on change
+                    className={styles.inputs}
+                  />
+                )}
+                {step === 3 && ( // Check if step is 3 (for capturing the item amount)
+                  <input
+                    type="number" // Ensure the input type is set to "number" for numerical input
+                    value={itemAmountSpent} // Bind the input value to the itemAmountSpent state
+                    onChange={(e) => setItemAmountSpent(e.target.value)} // Update the itemAmountSpent state on change
                     className={styles.inputs}
                   />
                 )}

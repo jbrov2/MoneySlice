@@ -37,11 +37,13 @@ const createNewBudget = async (req, res) => {
       Budgeted_Amount,
       Actual_Spending,
       User: user._id,
-      Item: Item.map((item, index) => ({
-        Name: item.Name,
-        Amount_Spent: item.Amount_Spent,
-        ID: item.ID || index + 1,
-      })),
+      Item: Array.isArray(Item)
+        ? Item.map((item, index) => ({
+            Name: item.Name,
+            Amount_Spent: item.Amount_Spent,
+            ID: item.ID || index + 1,
+          }))
+        : [],
     });
 
     await newBudget.save();

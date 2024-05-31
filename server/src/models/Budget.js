@@ -10,7 +10,7 @@ const BudgetSchema = new Schema({
       ID: { type: Number },
     },
   ],
-  Budgeted_Amount: Number,
+  Budgeted_Amount: { type: Number, required: true },
   Actual_Spending: { type: Number, default: 0 },
   Remaining_Budget: {
     type: Number,

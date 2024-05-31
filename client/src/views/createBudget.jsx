@@ -23,10 +23,24 @@ function CreateAPie() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState("");
   const [itemAmountSpent, setItemAmountSpent] = useState("");
-
-  useEffect(() => {
-    console.log("Updated Items:", items);
-  }, [items]);
+  const [currentItemIndex, setCurrentItemIndex] = useState(1);
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Spending",
+        data: [],
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#4BC0C0",
+          "#9966FF",
+          "#FF9F40",
+        ],
+      },
+    ],
+  });
 
   const questions = [
     {
@@ -40,33 +54,39 @@ function CreateAPie() {
       setter: setBudgetAmount,
     },
     {
-      question: "Please provide a name for your slice",
+      question: `Please provide a name for your slice #${currentItemIndex}`,
       value: itemName,
       setter: setItemName,
     },
     {
-      question: "Please provide an amount for your slice",
+      question: `Please provide an amount for your slice #${currentItemIndex}`,
       value: itemAmountSpent,
       setter: setItemAmountSpent,
+    },
+    {
+      question: `Would you like to add another slice or save your budget.`,
     },
   ];
 
   function handleNext() {
-    console.log("step:", step);
-    console.log("itemName:", itemName);
-    console.log("itemAmountSpent:", itemAmountSpent);
-    console.log("step === 2:", step === 2);
-    console.log("itemName truthiness:", !!itemName); // Check if itemName is truthy
-    console.log("itemAmountSpent truthiness:", !!itemAmountSpent); // Check if itemAmountSpent is truthy
-
-    if (step === 3 && itemName && itemAmountSpent) {
-      setItems([...items, { name: itemName, amount: itemAmountSpent }]);
-      console.log("Updated Items:", items);
-      setStep(4); // Move to the next step after adding an item
-    } else if (questions[step].value || step === 4) {
+    if (questions[step]?.value || step >= questions.length) {
       setStep((prev) => prev + 1);
     }
   }
+
+  function handleAddItem() {
+    if (itemName && itemAmountSpent) {
+      setItems([
+        ...items,
+        { name: itemName, amount: parseFloat(itemAmountSpent) },
+      ]);
+      setItemName("");
+      setItemAmountSpent("");
+      setCurrentItemIndex((prev) => prev + 1);
+      setStep(2);
+    }
+  }
+
   function handlePrev() {
     if (step > 0) {
       setStep((prev) => prev - 1);
@@ -76,9 +96,21 @@ function CreateAPie() {
   async function handleSaveBudget() {
     const token = localStorage.getItem("accessToken");
 
-    const formattedItems = items.map((item, index) => ({
+    // Check if Budget_Amount is provided
+    if (!Budget_Amount) {
+      console.error("Budgeted Amount is required.");
+      return;
+    }
+
+    // Create a temporary array that includes the final item
+    const allItems = [
+      ...items,
+      { name: itemName, amount: parseFloat(itemAmountSpent) },
+    ];
+
+    const formattedItems = allItems.map((item, index) => ({
       Name: item.name,
-      Amount_Spent: item.amount,
+      Amount_Spent: parseFloat(item.amount),
       ID: index + 1,
     }));
 
@@ -109,23 +141,25 @@ function CreateAPie() {
     }
   }
 
-  const chartData = {
-    labels: items.map((item) => item.name),
-    datasets: [
-      {
-        label: "Spending",
-        data: items.map((item) => item.amount),
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "#4BC0C0",
-          "#9966FF",
-          "#FF9F40",
-        ],
-      },
-    ],
-  };
+  useEffect(() => {
+    setChartData({
+      labels: items.map((item) => item.name),
+      datasets: [
+        {
+          label: "Spending",
+          data: items.map((item) => parseFloat(item.amount)),
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#4BC0C0",
+            "#9966FF",
+            "#FF9F40",
+          ],
+        },
+      ],
+    });
+  }, [items]);
 
   return (
     <>
@@ -180,15 +214,19 @@ function CreateAPie() {
             </h1>
           </div>
           <section className={styles.PieBulder}>
-            {step < 4 ? (
+            {step < 5 ? (
               <div className={styles.question_container}>
-                <p className={styles.questions}>{questions[step].question}</p>
-                <input
-                  type={step === 1 || step === 3 ? "number" : "text"}
-                  value={questions[step].value}
-                  onChange={(e) => questions[step].setter(e.target.value)}
-                  className={styles.inputs}
-                />
+                <p className={styles.questions}>
+                  {questions[step]?.question || ""}
+                </p>
+                {step < 4 && (
+                  <input
+                    type={step === 1 || step === 3 ? "number" : "text"}
+                    value={questions[step]?.value || ""}
+                    onChange={(e) => questions[step]?.setter(e.target.value)}
+                    className={styles.inputs}
+                  />
+                )}
                 <div className={styles.navigation_button}>
                   <button
                     onClick={handlePrev}
@@ -197,16 +235,26 @@ function CreateAPie() {
                   >
                     Previous
                   </button>
-                  <button onClick={handleNext} className={styles.nav_btn}>
-                    {step === 2 ? "Add Item" : "Next"}
-                  </button>
-                  {step === 2 && items.length > 0 && (
-                    <button
-                      onClick={() => setStep(4)}
-                      className={styles.nav_btn}
-                    >
-                      Finish Adding Items
+                  {step < 4 && (
+                    <button onClick={handleNext} className={styles.nav_btn}>
+                      Next
                     </button>
+                  )}
+                  {step === 4 && (
+                    <>
+                      <button
+                        onClick={handleAddItem}
+                        className={styles.nav_btn}
+                      >
+                        Add Item
+                      </button>
+                      <button
+                        onClick={() => setStep(5)}
+                        className={styles.nav_btn}
+                      >
+                        Finish Adding Items
+                      </button>
+                    </>
                   )}
                 </div>
               </div>
@@ -215,6 +263,13 @@ function CreateAPie() {
                 <button onClick={handleSaveBudget} className={styles.save_btn}>
                   Save Budget
                 </button>
+              </div>
+            )}
+            {items.length > 0 && (
+              <div className={styles.item_log}>
+                <h3>Last Added Item:</h3>
+                <p>Name: {items[items.length - 1].name}</p>
+                <p>Amount: {items[items.length - 1].amount}</p>
               </div>
             )}
           </section>

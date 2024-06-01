@@ -19,6 +19,8 @@ const getAllBudgets = async (req, res) => {
 
 const createNewBudget = async (req, res) => {
   try {
+    console.log("Request body received:", req.body); // Log the entire request body
+
     // Check if user is logged in
     const userName = req.user.userName; // Access userId from req.user
     const user = await UserModel.findOne({ userName });
@@ -28,19 +30,25 @@ const createNewBudget = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Extract data from request body
+    // Extract data from request body with the correct key
     const { Category, Budgeted_Amount, Actual_Spending, Item } = req.body;
+
+    // Check if Budget_Amount is still undefined here
+    if (Budgeted_Amount === undefined) {
+      console.error("Budget_Amount is undefined");
+      return res.status(400).json({ message: "Budget_Amount is required" });
+    }
 
     // Create a new budget and associate it with the current user
     const newBudget = new BudgetModel({
       Category,
-      Budgeted_Amount,
+      Budgeted_Amount: Budgeted_Amount, // Use the correct key here
       Actual_Spending,
       User: user._id,
       Item: Array.isArray(Item)
         ? Item.map((item, index) => ({
-            Name: item.Name,
-            Amount_Spent: item.Amount_Spent,
+            Name: item.name, // Use `name` as per the frontend data structure
+            Amount_Spent: item.amount, // Use `amount` as per the frontend data structure
             ID: item.ID || index + 1,
           }))
         : [],

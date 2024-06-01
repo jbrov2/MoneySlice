@@ -84,6 +84,20 @@ function CreateAPie() {
     setStep(0);
     setChartData({
       labels: [],
+      datasets: [
+        {
+          label: "Spending",
+          data: [],
+          backgroundColor: [
+            "#2F4B26",
+            "#3E885B",
+            "#85BDA6",
+            "#BEDCFE",
+            "#C0D7BB",
+            "#F3D3BD",
+          ],
+        },
+      ],
     });
   }
   function handleNext() {
@@ -304,7 +318,10 @@ function CreateAPie() {
                 </button>
                 <button
                   className={styles.createNewBudget}
-                  onClick={() => setStep(0)}
+                  onClick={() => {
+                    handleSaveBudget();
+                    resetState();
+                  }}
                 >
                   Create New Budget
                 </button>

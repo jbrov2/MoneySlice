@@ -50,6 +50,7 @@
     margin-left: 2em;
     margin-right: 2em;
     border-radius: 25px;
+    font-size: 1em;
     border: none;
     transition: transform 1.3s;
     transform: scale(1);

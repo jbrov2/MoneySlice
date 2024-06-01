@@ -18,6 +18,8 @@ function Logout() {
       });
 
       if (response.status === 204) {
+        localStorage.removeItem("accessToken");
+        console.log("Access Token has been removed");
         history("/landingPage");
       }
     } catch (error) {

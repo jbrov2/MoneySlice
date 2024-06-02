@@ -140,13 +140,14 @@
 .popupContent {
     background-color: white;
     padding: 4em;
-    border-radius: 10px;
+    border-radius: 30px;
     text-align: center;
     height: 60%;
     width: 70%; /* Adjust width as needed */
     max-width: 400px; /* Ensures it doesn't get too large on wider screens */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
 }
+
 
 
 .close_button{
@@ -158,6 +159,7 @@
     border-radius: 35px;
     font-family: 'Sora Variable', sans-serif;
     font-size: 1em;
+    /* s */
     transition: transform 1.3s;
     transform: scale(1);
 }

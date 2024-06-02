@@ -44,7 +44,6 @@ function ViewAPie() {
   async function seeBudget() {
     try {
       const token = localStorage.getItem("accessToken");
-
       const response = await fetch("http://localhost:5000/budget", {
         method: "GET",
         headers: {
@@ -53,6 +52,7 @@ function ViewAPie() {
         },
       });
       const data = await response.json();
+      console.log("Fetched budget data:", data); // Debugging statement
       setBudget(data);
     } catch (error) {
       console.error("Error fetching budget", error);
@@ -60,13 +60,14 @@ function ViewAPie() {
   }
 
   function handleBoxClick(budget) {
+    console.log("Selected budget:", budget); // Debugging statement
     setSelectedBudget(budget);
     setChartData({
-      labels: budget.Item.map((item) => item.name),
+      labels: budget.items.map((item) => item.name),
       datasets: [
         {
           label: "Spending",
-          data: budget.Item.map((item) => item.amount),
+          data: budget.items.map((item) => item.amountSpent),
           backgroundColor: [
             "#2F4B26",
             "#3E885B",
@@ -83,104 +84,102 @@ function ViewAPie() {
   function handleClosePopup() {
     setSelectedBudget(null);
   }
-  return (
-    <>
-      <div className={styles.wrapper}>
-        <div className={styles.main}>
-          <section className={styles.sidebar}>
-            <div className={styles.logo}>
-              <h2>MS</h2>
-            </div>
 
-            <div className={styles.selection}>
-              <div className={styles.sidescreen_links}>
-                <ul>
-                  <li className={styles.links} onClick={handleHomePage}>
-                    Home
-                  </li>
-                  <li className={styles.links} id={styles.static}>
-                    Budgets
-                  </li>
-                  <li
-                    className={styles.links}
-                    id={styles.chosen_link}
-                    onClick={handleViewPage}
-                  >
-                    View
-                  </li>
-                  <li className={styles.links} onClick={handleCreatePage}>
-                    {" "}
-                    Make
-                  </li>
-                  <li className={styles.links} onClick={handleUpdatePage}>
-                    Update
-                  </li>
-                  <li className={styles.links} onClick={handleDeletePage}>
-                    Delete
-                  </li>
-                  <li
-                    className={styles.links}
-                    id={styles.logout_link}
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-          <div className={styles.welcome_banner}>
-            <h1 className={styles.h1_text}>
-              Welcome to <span className={styles.custom_text}>View a Pie</span>!
-            </h1>
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.main}>
+        <section className={styles.sidebar}>
+          <div className={styles.logo}>
+            <h2>MS</h2>
           </div>
-          <section className={styles.main_screen}>
-            <section className={styles.prompt}>
-              <h2 className={styles.prompt_h2}>
-                Choose a <span className={styles.custom_text}>PieChart</span> to
-                View :
-              </h2>
-              {budget.length === 0 ? (
-                <p className={styles.noBudget}>
-                  {" "}
-                  No budgets are available. Please create a budget.
-                </p>
-              ) : (
-                <div className={styles.budget_Boxes}>
-                  {budget.map((budget, i) => (
-                    <div
-                      key={i}
-                      className={styles.budget_Box}
-                      onClick={() => handleBoxClick(budget)}
-                    >
-                      <h3>{budget.Category}</h3>
-                    </div>
-                  ))}
-                </div>
-              )}{" "}
-            </section>{" "}
-            {selectedBudget && (
-              <div className={styles.popup}>
-                <div className={styles.popupContent}>
-                  <h2>{selectedBudget.Category}</h2>
-                  <p>Budgeted Amount: {selectedBudget.Budgeted_Amount}</p>
-                  <h3>Items</h3>
-                  <div className={styles.chartContainer}>
-                    <Pie data={chartData}></Pie>
-                  </div>
-                  <button
-                    className={styles.close_button}
-                    onClick={handleClosePopup}
+          <div className={styles.selection}>
+            <div className={styles.sidescreen_links}>
+              <ul>
+                <li className={styles.links} onClick={handleHomePage}>
+                  Home
+                </li>
+                <li className={styles.links} id={styles.static}>
+                  Budgets
+                </li>
+                <li
+                  className={styles.links}
+                  id={styles.chosen_link}
+                  onClick={handleViewPage}
+                >
+                  View
+                </li>
+                <li className={styles.links} onClick={handleCreatePage}>
+                  Make
+                </li>
+                <li className={styles.links} onClick={handleUpdatePage}>
+                  Update
+                </li>
+                <li className={styles.links} onClick={handleDeletePage}>
+                  Delete
+                </li>
+                <li
+                  className={styles.links}
+                  id={styles.logout_link}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <div className={styles.welcome_banner}>
+          <h1 className={styles.h1_text}>
+            Welcome to <span className={styles.custom_text}>View a Pie</span>!
+          </h1>
+        </div>
+        <section className={styles.main_screen}>
+          <section className={styles.prompt}>
+            <h2 className={styles.prompt_h2}>
+              Choose a <span className={styles.custom_text}>PieChart</span> to
+              View :
+            </h2>
+            {budget.length === 0 ? (
+              <p className={styles.noBudget}>
+                No budgets are available. Please create a budget.
+              </p>
+            ) : (
+              <div className={styles.budget_Boxes}>
+                {budget.map((budget, i) => (
+                  <div
+                    key={i}
+                    className={styles.budget_Box}
+                    onClick={() => handleBoxClick(budget)}
                   >
-                    Close
-                  </button>
-                </div>
+                    <h3>{budget.category}</h3>
+                  </div>
+                ))}
               </div>
             )}
           </section>
-        </div>
+          {selectedBudget && (
+            <div className={styles.popup}>
+              <div className={styles.popupContent}>
+                <h2>{selectedBudget.category}</h2>
+                <p>Budgeted Amount: {selectedBudget.budgetedAmount}</p>
+                <p>Actual Spending: {selectedBudget.actualSpending}</p>
+                <p>Amount Remaining: {selectedBudget.remainingBudget}</p>
+                <h3>Items</h3>
+                <div className={styles.chartContainer}>
+                  <Pie data={chartData}></Pie>
+                </div>
+                <button
+                  className={styles.close_button}
+                  onClick={handleClosePopup}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
       </div>
-    </>
+    </div>
   );
 }
 

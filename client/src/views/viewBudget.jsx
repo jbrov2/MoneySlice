@@ -137,7 +137,7 @@ function ViewAPie() {
           <section className={styles.prompt}>
             <h2 className={styles.prompt_h2}>
               Choose a <span className={styles.custom_text}>PieChart</span> to
-              View :
+              view :
             </h2>
             {budget.length === 0 ? (
               <p className={styles.noBudget}>

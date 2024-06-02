@@ -10,7 +10,17 @@ const getAllBudgets = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.json(user.AssignedBudgets);
+    const budgets = user.AssignedBudgets.map((budget) => ({
+      category: budget.Category,
+      items: budget.Item.map((item) => ({
+        name: item.Name,
+        amountSpent: item.Amount_Spent,
+      })),
+      budgetedAmount: budget.Budgeted_Amount,
+      actualSpending: budget.Actual_Spending,
+      remainingBudget: budget.Remaining_Budget,
+    }));
+    res.json(budgets);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to retrieve budgets" });

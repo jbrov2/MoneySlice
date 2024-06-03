@@ -80,16 +80,15 @@ const createNewBudget = async (req, res) => {
 const updateBudget = async (req, res) => {
   try {
     // Verify the user
-    const userName = req.user.userName; // Grabbing username from the req
-    const user = await UserModel.findOne({ userName }); // Grabbing username from db
+    const userName = req.user.userName;
+    const user = await UserModel.findOne({ userName });
 
-    // Checking for user
     if (!user) {
       return res.status(404).json({ message: "User has not been found" });
     }
 
-    // Grabbing the Category, Budgeted_Amount, Actual_Spending, and Items
-    const { Category, Budgeted_Amount, Actual_Spending, Item } = req.body;
+    // Grabbing the Category, Budgeted_Amount, and Items
+    const { Category, Budgeted_Amount, Item } = req.body;
 
     // Find the budget by Category and User
     const budget = await BudgetModel.findOne({ Category, User: user._id });
@@ -98,12 +97,17 @@ const updateBudget = async (req, res) => {
       return res.status(404).json({ message: "Budget has not been found" });
     }
 
-    // Updating budget fields
-    budget.Budgeted_Amount = Budgeted_Amount;
-    budget.Actual_Spending = Actual_Spending;
-    budget.Remaining_Budget = Budgeted_Amount - Actual_Spending;
+    // Update Budgeted_Amount and Actual_Spending if provided
+    if (!isNaN(parseFloat(Budgeted_Amount))) {
+      budget.Budgeted_Amount = parseFloat(Budgeted_Amount);
+    }
 
-    // Updating Items section
+    // Calculate Remaining_Budget only if Budgeted_Amount and Actual_Spending are valid numbers
+    if (!isNaN(budget.Budgeted_Amount) && !isNaN(budget.Actual_Spending)) {
+      budget.Remaining_Budget = budget.Budgeted_Amount - budget.Actual_Spending;
+    }
+
+    // Update Items section
     if (Item && Array.isArray(Item)) {
       // Clear existing items
       budget.Item = [];

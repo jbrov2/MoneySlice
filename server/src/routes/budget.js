@@ -14,7 +14,7 @@ router
   .route("/")
   .get(getAllBudgets)
   .post(createNewBudget)
-  .put(updateBudget)
+  .patch(updateBudget)
   .delete(deleteBudget);
 
 router.route("/:id").get((req, res) => res.json({ id: req.params }));

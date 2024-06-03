@@ -37,10 +37,13 @@ function UpdateBudget() {
   });
   //editing budget
   const [Budget_Amounted, setBudget_Amounted] = useState("");
+  const [newBudget_Amounted, setNewBudget_Amounted] = useState("");
   const [Category, setCategory] = useState("");
+
   const [items, setItems] = useState([]);
-  const [itemName, setItemName] = useState("");
-  const [itemAmountSpent, setItemAmountSpent] = useState("");
+  const [newItems, setNewItems] = useState([]);
+  // const [itemName, setItemName] = useState("");
+  // const [itemAmountSpent, setItemAmountSpent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   //after everything is said and done this effect will allow you to see the budget
   useEffect(() => {
@@ -68,23 +71,45 @@ function UpdateBudget() {
   function handleBoxClick(budget) {
     console.log("Selected budget:", budget); // Debugging statement
     setSelectedBudget(budget);
-    setChartData({
-      labels: budget.items.map((item) => item.name),
-      datasets: [
-        {
-          label: "Spending",
-          data: budget.items.map((item) => item.amountSpent),
-          backgroundColor: [
-            "#2F4B26",
-            "#3E885B",
-            "#85BDA6",
-            "#BEDCFE",
-            "#C0D7BB",
-            "#F3D3BD",
-          ],
-        },
-      ],
-    });
+    if (budget && budget.items) {
+      setChartData({
+        labels: budget.items.map((item) => item.name),
+        datasets: [
+          {
+            label: "Spending",
+            data: budget.items.map((item) => item.amountSpent),
+            backgroundColor: [
+              "#2F4B26",
+              "#3E885B",
+              "#85BDA6",
+              "#BEDCFE",
+              "#C0D7BB",
+              "#F3D3BD",
+            ],
+          },
+        ],
+      });
+    } else {
+      // Handle the case where items are not available
+      console.log("Selected budget does not have items.");
+      setChartData({
+        labels: [],
+        datasets: [
+          {
+            label: "Spending",
+            data: [],
+            backgroundColor: [
+              "#2F4B26",
+              "#3E885B",
+              "#85BDA6",
+              "#BEDCFE",
+              "#C0D7BB",
+              "#F3D3BD",
+            ],
+          },
+        ],
+      });
+    }
   }
 
   function handleEditButton() {
@@ -94,14 +119,21 @@ function UpdateBudget() {
     setItems(selectedBudget.items);
   }
 
+  function handleAddItem() {
+    const newItem = {
+      name: "",
+      amountSpent: "",
+    };
+    setItems([...items, newItem]);
+  }
   async function handleSaveEdit() {
     const token = localStorage.getItem("accessToken");
 
-    const Budgeted_Amount = parseFloat(Budget_Amounted);
+    const newBudgeted_Amount = parseFloat(newBudget_Amounted);
     const requestBody = {
       Category,
-      Budgeted_Amount: Budgeted_Amount,
-      Item: items,
+      Budgeted_Amount: newBudgeted_Amount,
+      Item: newItems,
     };
     try {
       const response = await fetch("http://localhost:5000/budget", {
@@ -119,6 +151,15 @@ function UpdateBudget() {
       }
 
       const data = await response.json();
+      console.log("Fetched budget data", data);
+
+      setSelectedBudget(data);
+      setCategory(data.category);
+      setBudget_Amounted(data.budgetedAmount);
+      setItems(data.items);
+
+      //exit editing mode
+      setIsEditing(false);
     } catch (error) {
       console.error.eror("Failed to Parse JSON response:", error);
     }
@@ -258,20 +299,117 @@ function UpdateBudget() {
                 {isEditing && (
                   <div className={styles.popup_edit}>
                     <div className={styles.pop_edit_content}>
-                      <h2>Edit Content</h2>
-                      <div className={styles.prevSection}>
-                        <p>Category: {selectedBudget.category}</p>
-                        <p>Budgeted Amount: {selectedBudget.remainingBudget}</p>
-                        <p>Name: {items[items.length - 1].name}</p>
-                        <p>Amount: {items[items.length - 1].amount}</p>
+                      <h2 className={styles.edit_header}>Edit Content</h2>
+                      <div className={styles.prev_section}>
+                        <h3>Prev Details:</h3>
+                        <h4>Category: {selectedBudget.category}</h4>
+                        <p className={styles.custom_text}>
+                          Budgeted Amount:{" "}
+                          <span className={styles.normal}>
+                            {selectedBudget.budgetedAmount}
+                          </span>{" "}
+                        </p>
+                        {items.length > 0 ? (
+                          items.map((item, i) => (
+                            <div key={i}>
+                              <p className={styles.custom_text}>
+                                Name:{" "}
+                                <span className={styles.normal}>
+                                  {item.name}
+                                </span>
+                              </p>
+                              <p className={styles.custom_text}>
+                                Amount:{" "}
+                                <span className={styles.normal}>
+                                  {item.amountSpent}
+                                </span>
+                              </p>
+                            </div>
+                          ))
+                        ) : (
+                          <p>No items available</p>
+                        )}
                       </div>
-                      <div className={styles.button_holder}>
+                      <div className={styles.current_section}>
+                        <div className={styles.current_info}>
+                          <label htmlFor="Category">Category:</label>
+                          <input
+                            type="text"
+                            value={Category}
+                            placeholder={Category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className={styles.inputs}
+                            size={"35"}
+                            id="Category"
+                          />
+
+                          <label htmlFor="Budgeted_Amount">
+                            Budgeted Amount:
+                          </label>
+                          <input
+                            type="text"
+                            value={newBudget_Amounted}
+                            placeholder={Budget_Amounted}
+                            onChange={(e) =>
+                              setNewBudget_Amounted(e.target.value)
+                            }
+                            className={styles.inputs}
+                            size={"35"}
+                            id="Budgeted_Amount"
+                          />
+
+                          {items.map((item, i) => (
+                            <div key={i}>
+                              <div className={styles.input_group}>
+                                <label htmlFor="Item_Name">Item Name:</label>
+                                <input
+                                  type="text"
+                                  value={newItems[i]?.name}
+                                  placeholder={item.name}
+                                  onChange={(e) => {
+                                    const updatedItems = [...newItems];
+                                    updatedItems[i].name = e.target.value;
+                                    setNewItems(updatedItems);
+                                  }}
+                                  size={"35"}
+                                  id="Item_Name"
+                                />
+                              </div>
+                              <div className={styles.input_group}>
+                                <label htmlFor="Item_Amount">
+                                  Item Amount:
+                                </label>
+                                <input
+                                  type="number"
+                                  value={newItems[i]?.amountSpent}
+                                  placeholder={item.amountSpent}
+                                  onChange={(e) => {
+                                    const updatedItems = [...newItems];
+                                    updatedItems[i].amountSpent =
+                                      e.target.value;
+                                    setNewItems(updatedItems);
+                                  }}
+                                  size={"35"}
+                                  id="Item_Amount"
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className={styles.button_holder_edit}>
                         <button
                           className={styles.save_button}
                           onClick={handleSaveEdit}
                         >
-                          {" "}
                           Save
+                        </button>
+                        <button
+                          className={styles.add_item_button}
+                          onClick={handleAddItem}
+                        >
+                          Add Item
                         </button>
                         <button
                           className={styles.cancel_button}

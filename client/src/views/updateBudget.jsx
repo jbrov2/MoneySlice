@@ -242,7 +242,7 @@ function UpdateBudget() {
           <div className={styles.welcome_banner}>
             <h1 className={styles.h1_text}>
               Welcome to{" "}
-              <span className={styles.custom_text}>Update a Pie</span> !
+              <span className={styles.custom_text}>Update a Pie</span>!
             </h1>
           </div>
           <section className={styles.main_section}>

@@ -14,7 +14,51 @@ function DeleteBudget() {
 
   const [budget, setBudget] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(null);
+  const [authenticated, setAuthenticated] = useState(true); // Initially assuming user is authenticated
 
+  useEffect(() => {
+    const minute = 1000 * 60;
+    const interval = setInterval(() => {
+      const url = "http://localhost:5000/refresh";
+      const token = localStorage.getItem("accessToken");
+
+      if (!token) {
+        // User is not authenticated, redirect to login page
+        setAuthenticated(false);
+        navigate("/login"); // Adjust the route as per your application
+        return;
+      }
+
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            // Access token expired or invalid, redirect to login page
+            setAuthenticated(false);
+            navigate("/login"); // Adjust the route as per your application
+            return;
+          }
+          return response.json();
+        })
+        .then((data) => {
+          localStorage.access = data.access;
+          localStorage.refresh = data.refresh;
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error("Error refreshing tokens:", error);
+        });
+    }, minute * 3);
+
+    return () => {
+      clearInterval(interval); // Cleanup: Clear the interval when component is unmounted
+    };
+  }, [navigate]); // Dependency on navigate to avoid stale closure
   useEffect(() => {
     seeBudget();
   }, []);
@@ -28,8 +72,6 @@ function DeleteBudget() {
   }
 
   async function handleDeleteBudget() {
-    const token = localStorage.getItem("accessToken");
-
     const requestBody = { Category: selectedBudget.category };
     try {
       const response = await fetch("http://localhost:5000/budget", {

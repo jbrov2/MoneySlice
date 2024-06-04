@@ -115,7 +115,7 @@ function Register() {
               className={styles.signUp}
             >
               <h2 className={styles.signUp_title}>Sign Up</h2>{" "}
-              <label htmlFor="signUp-labels" className={styles.signUp_details}>
+              <label htmlFor="signUp_email" className={styles.signUp_details}>
                 Email
                 <span className={styles.icon_checker}>
                   <FontAwesomeIcon
@@ -134,10 +134,10 @@ function Register() {
               </label>
               <input
                 type="text"
-                name="signUp-labels"
+                name="signUp_email"
                 placeholder="Email"
                 className={styles.signUp_details_i}
-                id={styles.signUp_input}
+                id="signUp_email"
                 size={"45"}
                 onChange={(e) => setEmail(e.target.value)}
                 ref={userRef}
@@ -147,18 +147,10 @@ function Register() {
                 onFocus={() => setEmailFocus(true)}
                 onBlur={() => setEmailFocus(false)}
               />
-              <p
-                id={styles.uidnote}
-                className={
-                  emailFocus && email && !validEmail
-                    ? styles.instructions
-                    : styles.offscreen
-                }
+              <label
+                htmlFor="signUp_username"
+                className={styles.signUp_details}
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                Enter in your email address
-              </p>
-              <label htmlFor="signUp-labels" className={styles.signUp_details}>
                 Username
                 <span>
                   <FontAwesomeIcon
@@ -177,10 +169,10 @@ function Register() {
               </label>
               <input
                 type="text"
-                name="signUp-labels"
+                name="signUp_username"
                 placeholder="Username"
                 className={styles.signUp_details_i}
-                id={styles.signUp_input}
+                id="signUp_username"
                 size={"45"}
                 ref={userRef}
                 onChange={(e) => setUserName(e.target.value)}
@@ -188,22 +180,8 @@ function Register() {
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}
               />
-              <p
-                id={styles.uidnote}
-                className={
-                  userFocus && userName && !validUserName
-                    ? styles.instructions
-                    : styles.offscreen
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                4 to 24 characters. <br />
-                Must begin with a letter.
-                <br />
-                Letters, numbers, underscores, hyphens allowed.
-              </p>
               <label
-                htmlFor="signUp_labels_username"
+                htmlFor="signUp_password"
                 className={styles.signUp_details}
               >
                 Password
@@ -224,10 +202,10 @@ function Register() {
               </label>
               <input
                 type="password"
-                name="signUp-labels-username"
+                name="signUp_password"
                 placeholder="Password"
                 className={styles.signUp_details_i}
-                id={styles.signUp_input_username}
+                id="signUp_password"
                 size={"45"}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -236,27 +214,8 @@ function Register() {
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
               />
-              <p
-                id={styles.pwdnote}
-                className={
-                  pwdFocus && !validPassword
-                    ? styles.instructions
-                    : styles.offscreen
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                8 to 24 characters. <br />
-                Must include uppercase and lowercase letters,
-                <br /> a number and a special character. <br />
-                Allowed special characters:{" "}
-                <span aria-label="exclamation mark">!</span>
-                <span aria-label="at symbol">@</span>
-                <span aria-label="hash-tag">#</span>
-                <span aria-label="percent">%</span>
-                <span aria-label="dollar sign">$</span>
-              </p>
               <label
-                htmlFor="signUp-labels-password"
+                htmlFor="signUp_confirmPassword"
                 className={styles.signUp_details}
               >
                 Confirm Password
@@ -281,10 +240,10 @@ function Register() {
               </label>
               <input
                 type="password"
-                name="signUp-labels-password"
+                name="signUp_confirmPassword"
                 placeholder="Confirm Password"
                 className={styles.signUp_details_i}
-                id={styles.signUp_input_password}
+                id="signUp_confirmPassword"
                 size={"45"}
                 required
                 onChange={(e) => setMatchPassword(e.target.value)}
@@ -320,14 +279,16 @@ function Register() {
             </form>{" "}
           </div>{" "}
           <div className={styles.welcome_back}>
-            <h2 className={styles.welcome_back_title}>Welcome Back!</h2>
-            <div className={styles.buttons}>
-              <button
-                className={styles.welcome_back_btn}
-                onClick={loginPageHandler}
-              >
-                LOG IN
-              </button>
+            <div className={styles.wb_content}>
+              <h2 className={styles.welcome_back_title}>Welcome Back!</h2>
+              <div className={styles.buttons}>
+                <button
+                  className={styles.welcome_back_btn}
+                  onClick={loginPageHandler}
+                >
+                  LOG IN
+                </button>
+              </div>
             </div>
           </div>
         </div>{" "}

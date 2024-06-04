@@ -1,11 +1,11 @@
 * {
     margin: 0;
+    padding: 0;
   }
   
 
 
   .wrapper {
-    
     display: grid; 
     overflow: hidden;
     height: 100vh;
@@ -118,3 +118,192 @@
     background-color:#C0D7BB ;
   }
   
+
+  /* For devices with width 320px and below */
+@media (max-width: 320px) {
+  .title {
+      font-size: 52px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.2);
+  }
+  .landing_text {
+      font-size: 2em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 28px;
+  }
+  #special_text {
+      font-size: 52px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 0.5em 1em;
+      font-size: 1em;
+  }
+}
+
+/* For devices with width 480px and below */
+@media (max-width: 480px) {
+  .title {
+      font-size: 72px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.3);
+  }
+  .landing_text {
+      font-size: 2.5em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 32px;
+  }
+  #special_text {
+      font-size: 72px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 0.6em 1.5em;
+      font-size: 1.2em;
+  }
+}
+
+/* For devices with width 600px and below */
+@media (max-width: 600px) {
+  .title {
+      font-size: 84px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.3);
+  }
+  .landing_text {
+      font-size: 3em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 40px;
+  }
+  #special_text {
+      font-size: 84px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 0.7em 2em;
+      font-size: 1.3em;
+  }
+}
+
+/* For devices with width 768px and below */
+@media (max-width: 768px) {
+  .title {
+      font-size: 92px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.3);
+  }
+  .landing_text {
+      font-size: 3.5em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 44px;
+  }
+  #special_text {
+      font-size: 92px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 0.8em 2.5em;
+      font-size: 1.4em;
+  }
+}
+
+/* For devices with width 900px and below */
+@media (max-width: 900px) {
+  .title {
+      font-size: 96px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.3);
+  }
+  .landing_text {
+      font-size: 3.8em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 48px;
+  }
+  #special_text {
+      font-size: 96px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 0.9em 2.8em;
+      font-size: 1.4em;
+  }
+}
+
+/* For devices with width 1024px and below */
+@media (max-width: 1024px) {
+  .title {
+      font-size: 64px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.3);
+  }
+  .landing_text {
+      font-size: 3.9em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 52px;
+  }
+  #special_text {
+      font-size: 98px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 1em 3em;
+      font-size: 1.5em;
+  }
+}
+
+/* For devices with width 1200px and below */
+@media (max-width: 1200px) {
+  .title {
+      font-size: 100px;
+  }
+  .title p {
+      transform: scale(1);
+  }
+  .title:hover p {
+      transform: scale(1.3);
+  }
+  .landing_text {
+      font-size: 4em;
+  }
+  .landing_text:nth-child(3) {
+      font-size: 54px;
+  }
+  #special_text {
+      font-size: 100px;
+  }
+  .signUp_btn,
+  .login_btn {
+      padding: 1.1em 3.2em;
+      font-size: 1.5em;
+  }
+}

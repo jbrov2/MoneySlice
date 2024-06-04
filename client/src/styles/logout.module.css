@@ -76,3 +76,151 @@
     cursor: pointer;
     transition: .5s;
 }
+
+
+/* For devices with width 320px and below */
+@media (max-width: 320px) {
+    .logout_box {
+        width: 90%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 28px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 80%;
+        margin: 1em 0;
+        padding: 0.6em 1em;
+        font-size: 0.8em;
+    }
+}
+
+/* For devices with width 480px and below */
+@media (max-width: 480px) {
+    .logout_box {
+        width: 80%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 32px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 70%;
+        margin: 1em 0;
+        padding: 0.7em 1.5em;
+        font-size: 0.9em;
+    }
+}
+
+/* For devices with width 600px and below */
+@media (max-width: 600px) {
+    .logout_box {
+        width: 70%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 36px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 60%;
+        margin: 1em 0;
+        padding: 0.7em 2em;
+        font-size: 0.9em;
+    }
+}
+
+/* For devices with width 768px and below */
+@media (max-width: 768px) {
+    .logout_box {
+        width: 60%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 38px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 50%;
+        margin: 1em 0;
+        padding: 0.8em 2em;
+        font-size: 1em;
+    }
+}
+
+/* For devices with width 900px and below */
+@media (max-width: 900px) {
+    .logout_box {
+        width: 50%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 40px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 40%;
+        margin: 1em 0;
+        padding: 0.8em 2em;
+        font-size: 1em;
+    }
+}
+
+/* For devices with width 1024px and below */
+@media (max-width: 1024px) {
+    .logout_box {
+        width: 45%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 42px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 35%;
+        margin: 1em 0;
+        padding: 0.8em 2em;
+        font-size: 1em;
+    }
+}
+
+/* For devices with width 1200px and below */
+@media (max-width: 1200px) {
+    .logout_box {
+        width: 40%;
+        height: auto;
+        margin: 2em 0;
+    }
+    .header h1 {
+        font-size: 42px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .button {
+        width: 30%;
+        margin: 1em 0;
+        padding: 0.8em 2em;
+        font-size: 1em;
+    }
+}

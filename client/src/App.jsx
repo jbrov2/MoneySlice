@@ -13,11 +13,34 @@ import ViewAPie from "./views/viewBudget";
 import UpdateAPie from "./views/updateBudget";
 import DeleteApie from "./views/deleteBudget";
 import LogoutPage from "./views/LogoutPage";
+import { useEffect } from "react";
 // Supports weights 100-800
 import "@fontsource-variable/sora";
 import "@fontsource/krona-one";
 
 function App() {
+  // useEffect(() => {
+  //   const minute = 1000 * 60;
+  //   setInterval(() => {
+  //     const url = "http://localhost:5000/refresh";
+  //     const token = localStorage.getItem("accessToken");
+  //     fetch(url, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //       .then((response) => {
+  //         return response.json();
+  //       })
+  //       .then((data) => {
+  //         localStorage.access = data.access;
+  //         localStorage.refresh = data.refresh;
+  //       });
+  //   }, minute * 3);
+  // }, []);
+
   return (
     <>
       <Router>

@@ -160,6 +160,7 @@ function CreateAPie() {
     try {
       const data = await response.json();
       console.log(data);
+      window.alert(`${Category} has been made`);
     } catch (error) {
       console.error("Failed to parse JSON response:", error);
     }

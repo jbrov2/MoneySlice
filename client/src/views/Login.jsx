@@ -141,11 +141,13 @@ function Login() {
           </form>
         </section>
         <div className={styles.signUp}>
-          <h1 className={styles.signUp_title}>Register</h1>
-          <div className={styles.button}>
-            <button onClick={signUpPageHandler} className={styles.signUp_btn}>
-              Register
-            </button>
+          <div className={styles.signUp_content}>
+            <h1 className={styles.signUp_title}>Register</h1>
+            <div className={styles.button}>
+              <button onClick={signUpPageHandler} className={styles.signUp_btn}>
+                Register
+              </button>
+            </div>
           </div>
         </div>
       </div>

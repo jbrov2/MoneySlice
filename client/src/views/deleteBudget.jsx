@@ -72,12 +72,14 @@ function DeleteBudget() {
   }
 
   async function handleDeleteBudget() {
+    const token = localStorage.getItem("accessToken");
     const requestBody = { Category: selectedBudget.category };
     try {
       const response = await fetch("http://localhost:5000/budget", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          // eslint-disable-next-line no-undef
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(requestBody),
@@ -89,7 +91,7 @@ function DeleteBudget() {
         return;
       }
     } catch (error) {
-      console.error.eror("Failed to Parse JSON response:", error);
+      console.error("Failed to Parse JSON response:", error);
     }
   }
   async function seeBudget() {

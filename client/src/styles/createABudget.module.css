@@ -109,12 +109,12 @@
 }
 
 .PieChart{
-    width: 80%;
+    /* width: 80%; */
     height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 3em;
+   
 }
 
 .info_section{

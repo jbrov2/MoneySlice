@@ -41,9 +41,7 @@ function UpdateBudget() {
   const [Category, setCategory] = useState("");
 
   const [items, setItems] = useState([]);
-  const [newItems, setNewItems] = useState([]);
-  // const [itemName, setItemName] = useState("");
-  // const [itemAmountSpent, setItemAmountSpent] = useState("");
+
   const [isEditing, setIsEditing] = useState(false);
   //after everything is said and done this effect will allow you to see the budget
   useEffect(() => {
@@ -133,7 +131,7 @@ function UpdateBudget() {
     const requestBody = {
       Category,
       Budgeted_Amount: newBudgeted_Amount,
-      Item: newItems,
+      Item: items,
     };
     try {
       const response = await fetch("http://localhost:5000/budget", {
@@ -152,7 +150,7 @@ function UpdateBudget() {
 
       const data = await response.json();
       console.log("Fetched budget data", data);
-
+      location.reload();
       setSelectedBudget(data);
       setCategory(data.category);
       setBudget_Amounted(data.budgetedAmount);
@@ -364,12 +362,12 @@ function UpdateBudget() {
                                 <label htmlFor="Item_Name">Item Name:</label>
                                 <input
                                   type="text"
-                                  value={newItems[i]?.name}
+                                  value={item[i]?.name}
                                   placeholder={item.name}
                                   onChange={(e) => {
-                                    const updatedItems = [...newItems];
+                                    const updatedItems = [...item];
                                     updatedItems[i].name = e.target.value;
-                                    setNewItems(updatedItems);
+                                    setItems(updatedItems);
                                   }}
                                   size={"35"}
                                   id="Item_Name"
@@ -381,13 +379,13 @@ function UpdateBudget() {
                                 </label>
                                 <input
                                   type="number"
-                                  value={newItems[i]?.amountSpent}
+                                  value={item[i]?.amountSpent}
                                   placeholder={item.amountSpent}
                                   onChange={(e) => {
-                                    const updatedItems = [...newItems];
+                                    const updatedItems = [...item];
                                     updatedItems[i].amountSpent =
                                       e.target.value;
-                                    setNewItems(updatedItems);
+                                    setItems(updatedItems);
                                   }}
                                   size={"35"}
                                   id="Item_Amount"

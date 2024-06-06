@@ -50,6 +50,7 @@ function ViewAPie() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
       });
       const data = await response.json();
       console.log("Fetched budget data:", data); // Debugging statement

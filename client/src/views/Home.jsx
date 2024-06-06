@@ -21,7 +21,7 @@ function Home() {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
-          // credentials: "include",
+          credentials: "include",
         });
 
         if (!response.ok) {

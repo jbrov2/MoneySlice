@@ -43,9 +43,9 @@ function Login() {
         const data = await response.json();
         const accessToken = data.accessToken;
         const refreshToken = data.refreshToken;
+        console.log("Access Token:", accessToken); // Log access token
         localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-        console.log("You have logged in");
+
         history("/home");
       } else if (response.status === 401) {
         alert("Username or Password is incorrect");

@@ -83,7 +83,7 @@ function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, userName, password }),
-        // credentials: "include", include credentials if needed
+        credentials: "include",
       });
       if (response.status === 201) {
         console.log("You have Registered in");

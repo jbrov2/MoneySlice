@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cookieParser = require("cookie-parser");
 const verifyJWT = require("./middleware/verifyJWT");
-const addAccessToken = require("./middleware/addAccessToken");
+
 //MODELS
 
 const url = process.env.MONGODB_URL;
@@ -21,20 +21,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 //middleware for cookies
 app.use(cookieParser());
-
-//Apply middleware to add access token
-app.use(addAccessToken);
 
 //ROUTES
 
 app.use("/signUp", require("./routes/signUp"));
 app.use("/login", require("./routes/auth"));
-app.use("/refresh", require("./routes/refresh"));
-app.use("/logout", require("./routes/logout"));
+app.use("/refresh", require("./routes/auth"));
+app.use("/logout", require("./routes/auth"));
+app.use("/auth", require("./routes/auth"));
 
 app.use(verifyJWT);
 app.use("/user", require("./routes/users"));

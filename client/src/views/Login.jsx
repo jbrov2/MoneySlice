@@ -42,7 +42,9 @@ function Login() {
       if (response.status === 200) {
         const data = await response.json();
         const accessToken = data.accessToken;
+        const refreshToken = data.refreshToken;
         localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
         console.log("You have logged in");
         history("/home");
       } else if (response.status === 401) {

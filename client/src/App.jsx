@@ -19,7 +19,7 @@ import "@fontsource/krona-one";
 
 function App() {
   useEffect(() => {
-    const intervalId = setInterval(refreshTokens, 1000 * 60 * 5); // Refresh tokens every 3 minutes
+    const intervalId = setInterval(refreshTokens, 1000 * 60 * 5); // Refresh tokens every 5 minutes
     return () => clearInterval(intervalId);
   }, []);
 

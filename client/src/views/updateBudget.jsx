@@ -120,19 +120,25 @@ function UpdateBudget() {
   function handleAddItem() {
     const newItem = {
       name: "",
-      amountSpent: "",
+      amountSpent: 0,
     };
     setItems([...items, newItem]);
   }
   async function handleSaveEdit() {
     const token = localStorage.getItem("accessToken");
 
+    const updatedItems = items.map((item) => ({
+      Name: item.name,
+      Amount_Spent: parseFloat(item.amountSpent),
+    }));
+
     const newBudgeted_Amount = parseFloat(newBudget_Amounted);
     const requestBody = {
       Category,
       Budgeted_Amount: newBudgeted_Amount,
-      Item: items,
+      Item: updatedItems,
     };
+    console.log("here are the added", requestBody);
     try {
       const response = await fetch("http://localhost:5000/budget", {
         method: "PATCH",
@@ -362,10 +368,10 @@ function UpdateBudget() {
                                 <label htmlFor="Item_Name">Item Name:</label>
                                 <input
                                   type="text"
-                                  value={item[i]?.name}
-                                  placeholder={item.name}
+                                  value={items[i]?.name}
+                                  placeholder={items.name}
                                   onChange={(e) => {
-                                    const updatedItems = [...item];
+                                    const updatedItems = [...items];
                                     updatedItems[i].name = e.target.value;
                                     setItems(updatedItems);
                                   }}
@@ -379,10 +385,10 @@ function UpdateBudget() {
                                 </label>
                                 <input
                                   type="number"
-                                  value={item[i]?.amountSpent}
-                                  placeholder={item.amountSpent}
+                                  value={items[i]?.amountSpent}
+                                  placeholder={items.amountSpent}
                                   onChange={(e) => {
-                                    const updatedItems = [...item];
+                                    const updatedItems = [...items];
                                     updatedItems[i].amountSpent =
                                       e.target.value;
                                     setItems(updatedItems);

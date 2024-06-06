@@ -156,12 +156,13 @@ function UpdateBudget() {
 
       const data = await response.json();
       console.log("Fetched budget data", data);
-      location.reload();
+
       setSelectedBudget(data);
       setCategory(data.category);
       setBudget_Amounted(data.budgetedAmount);
       setItems(data.items);
-
+      window.alert(`${selectedBudget.category} has been updated XD`);
+      location.reload();
       //exit editing mode
       setIsEditing(false);
     } catch (error) {

@@ -28,7 +28,7 @@ function App() {
     try {
       const refreshToken = localStorage.getItem("refreshToken");
       if (!refreshToken) return;
-      const response = await fetch("http://localhost:5000/refresh", {
+      const response = await fetch("http://localhost:5000/auth/refresh", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

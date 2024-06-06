@@ -7,9 +7,8 @@
 .wrapper {
     background: linear-gradient(to bottom, #ffffff, #85BDA6);
     margin: 0;
-    height: 100vh;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: auto; /* Allow scrolling if content overflows */
 }
 
 .main {
@@ -80,6 +79,7 @@
     font-family: 'Sora Variable', sans-serif;
     grid-area: main;
     height: 80vh;
+    overflow: auto; /* Allow scrolling within the main content area */
 }
 
 .main_hero_text {

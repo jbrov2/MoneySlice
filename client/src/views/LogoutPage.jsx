@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Logout() {
   const history = useNavigate();
-  const LOGOUT_URL = "http://localhost:5000/logout";
+  const LOGOUT_URL = "http://localhost:5000/auth/logout";
   function handleNo() {
     history("/home");
   }
@@ -11,7 +11,7 @@ function Logout() {
   async function handleYes() {
     try {
       const response = await fetch(LOGOUT_URL, {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

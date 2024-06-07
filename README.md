@@ -7,3 +7,4 @@ React.js
 Node.js
 Vite.js
 
+Currently working on making the website more responsive and mobile friendly 6/07

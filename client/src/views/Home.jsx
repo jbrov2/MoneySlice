@@ -6,10 +6,14 @@ function Home() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [budgetCount, setBudgetCount] = useState(0);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
+  function toggleSideBar() {
+    setSideBarOpen(!sideBarOpen);
+  }
   useEffect(() => {
     //also grabbing the access token
-    const fetchUserData = async () => {
+    async function fetchUserData() {
       try {
         //Get the accss token
         const accessToken = localStorage.getItem("accessToken");
@@ -34,7 +38,7 @@ function Home() {
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
-    };
+    }
 
     fetchUserData();
   }, []);
@@ -49,7 +53,12 @@ function Home() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <section className={styles.sidebar}>
+        <button className={styles.toggle_btn} onClick={toggleSideBar}>
+          ☰
+        </button>
+        <section
+          className={`${styles.sidebar} ${sideBarOpen ? `${styles.show}` : ""}`}
+        >
           <div className={styles.logo}>
             <h2>MS</h2>
           </div>

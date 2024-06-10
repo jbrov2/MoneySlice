@@ -19,6 +19,7 @@ function ViewAPie() {
 
   const [budget, setBudget] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(null);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -81,7 +82,9 @@ function ViewAPie() {
       ],
     });
   }
-
+  function toggleSideBar() {
+    setSideBarOpen(!sideBarOpen);
+  }
   function handleClosePopup() {
     setSelectedBudget(null);
   }
@@ -89,7 +92,12 @@ function ViewAPie() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <section className={styles.sidebar}>
+        <button className={styles.toggle_btn} onClick={toggleSideBar}>
+          ☰
+        </button>
+        <section
+          className={`${styles.sidebar} ${sideBarOpen ? `${styles.show}` : ""}`}
+        >
           <div className={styles.logo}>
             <h2>MS</h2>
           </div>

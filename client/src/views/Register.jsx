@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-constant-condition */
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
@@ -51,6 +52,7 @@ function Register() {
     const result = EMAIL_REGEX.test(email);
 
     setValidEmail(result);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email]);
 
   useEffect(() => {

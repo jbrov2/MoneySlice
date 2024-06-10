@@ -38,7 +38,14 @@
     height: 80vh;
 }
 .prompt{
-    margin-top:-27.3em;
+    font-family: 'Sora Variable', sans-serif;
+    grid-area:main;
+    height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100%; /* Limit the width to the viewport width */
+    padding: 0 1rem; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding and borders in the width */
 }
 .prompt_h2{
     margin-top: 3em;
@@ -48,14 +55,14 @@
     width: 100%;
 
 }
-.budget_Boxes{
+.budget_boxes{
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.budget_Box{
+.budget_box{
     background-color: #3E885B;
     font-family: 'Sora Variable', sans-serif;
     padding: 4em;
@@ -66,7 +73,7 @@
     transform: scale(1);
 }
 
-.budget_Box:hover{
+.budget_box:hover{
     cursor: pointer;
     transition: .5s;
     background-color: #85BDA6;
@@ -188,4 +195,63 @@
     transition: .5s;
     background-color: #BEDCFE;
     transform: scale(1.1);
+}
+
+
+@media  screen and (max-width: 1200px) {
+    .main{
+        grid-template-columns: 1fr;
+        grid-template-areas: "header"
+        "sidebar"
+        "main";
+        overflow-y: scroll;
+        height: 100vh;
+    }
+    .prompt_h2{
+        margin: 3em auto 4em auto; /* Center the element */
+        width: auto; /* Adjust width if necessary */
+        text-align: center;
+    }
+    .budget_boxes{
+        display: flex;
+        align-items: center;
+        flex-direction: column;   
+    }
+    .budget_box{
+        margin-bottom: 3em;
+        padding: 2em;
+    }
+    .links {
+        padding: 1em;
+        font-size: 1em;
+    }
+    .sidebar{
+        position: fixed;
+        left: -250px;
+        top:0;
+        width: 250px;
+        height: 100%;
+        transition: left 0.3s ease;
+        z-index: 100;
+    }
+    .sidebar.show{
+        left:0
+    }
+    .main.overlay{
+        opacity: 0.5;
+    }
+    .toggle_btn{
+        opacity: 0.5;
+        position: fixed;
+        top:15px;
+        right: 15px;
+        z-index: 101;
+        background: #2F4B26;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 1em;
+    }
 }

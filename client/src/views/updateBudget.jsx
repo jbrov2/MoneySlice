@@ -39,7 +39,7 @@ function UpdateBudget() {
   const [Budget_Amounted, setBudget_Amounted] = useState("");
   const [newBudget_Amounted, setNewBudget_Amounted] = useState("");
   const [Category, setCategory] = useState("");
-
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   const [items, setItems] = useState([]);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -170,6 +170,9 @@ function UpdateBudget() {
       console.error.eror("Failed to Parse JSON response:", error);
     }
   }
+  function toggleSideBar() {
+    setSideBarOpen(!sideBarOpen);
+  }
 
   function handleCancelEdit() {
     setIsEditing(false);
@@ -203,7 +206,14 @@ function UpdateBudget() {
     <>
       <div className={styles.wrapper}>
         <div className={styles.main}>
-          <section className={styles.sidebar}>
+          <button className={styles.toggle_btn} onClick={toggleSideBar}>
+            ☰
+          </button>
+          <section
+            className={`${styles.sidebar} ${
+              sideBarOpen ? `${styles.show}` : ""
+            }`}
+          >
             <div className={styles.logo}>
               <h2>MS</h2>
             </div>

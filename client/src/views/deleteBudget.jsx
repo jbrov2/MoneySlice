@@ -14,10 +14,14 @@ function DeleteBudget() {
 
   const [budget, setBudget] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(null);
-
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   useEffect(() => {
     seeBudget();
   }, []);
+
+  function toggleSideBar() {
+    setSideBarOpen(!sideBarOpen);
+  }
 
   function handleBoxClick(budget) {
     setSelectedBudget(budget);
@@ -73,7 +77,14 @@ function DeleteBudget() {
     <>
       <div className={styles.wrapper}>
         <div className={styles.main}>
-          <section className={styles.sidebar}>
+          <button className={styles.toggle_btn} onClick={toggleSideBar}>
+            ☰
+          </button>
+          <section
+            className={`${styles.sidebar} ${
+              sideBarOpen ? `${styles.show}` : ""
+            }`}
+          >
             <div className={styles.logo}>
               <h2>MS</h2>
             </div>
@@ -129,11 +140,11 @@ function DeleteBudget() {
                 No budgets are available. Please create a budget.
               </p>
             ) : (
-              <div className={styles.budget_Boxes}>
+              <div className={styles.budget_boxes}>
                 {budget.map((budget, i) => (
                   <div
                     key={i}
-                    className={styles.budget_Box}
+                    className={styles.budget_box}
                     onClick={() => handleBoxClick(budget)}
                   >
                     <h3>{budget.category}</h3>

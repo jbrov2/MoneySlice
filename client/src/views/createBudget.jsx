@@ -24,6 +24,7 @@ function CreateAPie() {
   const [itemName, setItemName] = useState("");
   const [itemAmountSpent, setItemAmountSpent] = useState("");
   const [currentItemIndex, setCurrentItemIndex] = useState(1);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -125,6 +126,9 @@ function CreateAPie() {
     }
   }
 
+  function toggleSideBar() {
+    setSideBarOpen(!sideBarOpen);
+  }
   async function handleSaveBudget() {
     const token = localStorage.getItem("accessToken");
     if (!Budget_Amounted) {
@@ -191,7 +195,14 @@ function CreateAPie() {
     <>
       <div className={styles.wrapper}>
         <div className={styles.main}>
-          <section className={styles.sidebar}>
+          <button className={styles.toggle_btn} onClick={toggleSideBar}>
+            ☰
+          </button>
+          <section
+            className={`${styles.sidebar} ${
+              sideBarOpen ? `${styles.show}` : ""
+            }`}
+          >
             <div className={styles.logo}>
               <h2>MS</h2>
             </div>

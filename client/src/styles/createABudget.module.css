@@ -329,11 +329,26 @@
         margin: 0.5em;
     }
 
-    .chart_area{
-        height: 100%;
+    .question_container {
+        height: auto;
         max-width: 300px;
         margin: auto;
     }
 
+    .chart_area {
+        height: auto;
+        max-width: 300px;
+        margin: auto;
+        margin-top: 2em; /* Adjust the margin as needed */
+        padding-bottom: 2em;
+    }
+
+    .info_section {
+        height: auto;
+        max-width: 300px;
+        margin: auto;
+        margin-top: 2em; /* Adjust the margin as needed */
+        margin-bottom: 2em;
+    }
 
 }

@@ -50,7 +50,7 @@ function App() {
 
   return (
     <>
-      <Router basename="/MoneySlice/">
+      <Router>
         <Routes>
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/smashAPie" element={<DeleteApie />} />

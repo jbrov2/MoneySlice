@@ -149,6 +149,12 @@ function Register() {
                 onFocus={() => setEmailFocus(true)}
                 onBlur={() => setEmailFocus(false)}
               />
+              <p id={styles.uidnote}
+              className={emailFocus && !email ? styles.instructions : styles.offscreen}
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Please enter your email address
+              </p>
               <label
                 htmlFor="signUp_username"
                 className={styles.signUp_details}
@@ -182,6 +188,12 @@ function Register() {
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}
               />
+              <p id={styles.uidnote}
+              className={userFocus && !userName ? styles.instructions : styles.offscreen}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must be 3 - 23
+                characters long.
+              </p>
               <label
                 htmlFor="signUp_password"
                 className={styles.signUp_details}
@@ -216,6 +228,13 @@ function Register() {
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
               />
+              <p id={styles.pwdnote}
+              className={pwdFocus && !password ? styles.instructions : styles.offscreen}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must be 8-24 characters <br/>
+                Must contain atleast one special character !@#$<br/>
+                Must contain atleast one number (0-9)
+              </p>
               <label
                 htmlFor="signUp_confirmPassword"
                 className={styles.signUp_details}

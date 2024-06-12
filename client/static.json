@@ -1,0 +1,18 @@
+{
+  "root": "dist/",
+  "routes": {
+    "/**": "index.html"
+  },
+  "headers": {
+    "/**": {
+      "Access-Control-Allow-Origin": "*"
+    },
+    "/assets/*": {
+      "Cache-Control": "max-age=31536000"
+    }
+  },
+  "mime_types": {
+    ".css": "text/css",
+    ".js": "application/javascript"
+  }
+}

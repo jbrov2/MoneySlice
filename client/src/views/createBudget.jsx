@@ -147,7 +147,7 @@ function CreateAPie() {
 
     console.log("Request body to be sent:", requestBody);
 
-    const response = await fetch("http://localhost:5000/budget", {
+    const response = await fetch("https://moneyslice-api.onrender.com/budget", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

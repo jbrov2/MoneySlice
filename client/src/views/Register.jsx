@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Register() {
-  const REGISTER_URL = "http://localhost:5000/signUp";
+  const REGISTER_URL = "https://moneyslice-api.onrender.com/signUp";
 
   const history = useNavigate();
 

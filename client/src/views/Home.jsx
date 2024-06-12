@@ -19,14 +19,17 @@ function Home() {
         const accessToken = localStorage.getItem("accessToken");
         console.log(accessToken);
         //now make the request
-        const response = await fetch("http://localhost:5000/user/info", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://moneyslice-api.onrender.com/user/info",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch user data");

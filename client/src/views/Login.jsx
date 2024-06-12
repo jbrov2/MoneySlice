@@ -62,7 +62,7 @@ function Login() {
       <div className={styles.main}>
         <section className={styles.login_holder}>
           <form
-            action="http://localhost:5000/login"
+            action="https://moneyslice-api.onrender.com/login"
             method="POST"
             className={styles.login_form}
           >

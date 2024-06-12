@@ -35,16 +35,19 @@ function DeleteBudget() {
     const token = localStorage.getItem("accessToken");
     const requestBody = { Category: selectedBudget.category };
     try {
-      const response = await fetch("http://localhost:5000/budget", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          // eslint-disable-next-line no-undef
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(
+        "https://moneyslice-api.onrender.com/budget",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            // eslint-disable-next-line no-undef
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+          body: JSON.stringify(requestBody),
+        }
+      );
       window.alert(`${selectedBudget.category} has been deleted`);
       location.reload();
       if (!response.ok) {
@@ -58,13 +61,16 @@ function DeleteBudget() {
   async function seeBudget() {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("http://localhost:5000/budget", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://moneyslice-api.onrender.com/budget",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       console.log("Fetched budget data:", data); // Debugging statement
       setBudget(data);

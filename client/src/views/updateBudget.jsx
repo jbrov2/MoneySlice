@@ -51,14 +51,17 @@ function UpdateBudget() {
   async function seeBudget() {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("http://localhost:5000/budget", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://moneyslice-api.onrender.com/budget",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }
+      );
       const data = await response.json();
       console.log("Fetched budget data:", data);
       setBudget(data);
@@ -141,14 +144,17 @@ function UpdateBudget() {
     };
     console.log("here are the added", requestBody);
     try {
-      const response = await fetch("http://localhost:5000/budget", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(
+        "https://moneyslice-api.onrender.com/budget",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
 
       if (!response.ok) {
         console.error(`Error: ${response.status} ${response.statusText}`);

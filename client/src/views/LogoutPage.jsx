@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Logout() {
   const history = useNavigate();
-  const LOGOUT_URL = "http://localhost:5000/auth/logout";
+  const LOGOUT_URL = "https://moneyslice-api.onrender.com/auth/logout";
   function handleNo() {
     history("/home");
   }

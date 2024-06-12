@@ -45,14 +45,17 @@ function ViewAPie() {
   async function seeBudget() {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("http://localhost:5000/budget", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://moneyslice-api.onrender.com/budget",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }
+      );
       const data = await response.json();
       console.log("Fetched budget data:", data); // Debugging statement
       setBudget(data);

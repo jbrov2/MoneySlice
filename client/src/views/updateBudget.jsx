@@ -39,10 +39,11 @@ function UpdateBudget() {
   const [Budget_Amounted, setBudget_Amounted] = useState("");
   const [newBudget_Amounted, setNewBudget_Amounted] = useState("");
   const [Category, setCategory] = useState("");
-  const [sideBarOpen, setSideBarOpen] = useState(false);
   const [items, setItems] = useState([]);
-
   const [isEditing, setIsEditing] = useState(false);
+  //monitoring size
+  const [isScreenSmall, setIsScreenSmall] = useState(false);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   //after everything is said and done this effect will allow you to see the budget
   useEffect(() => {
     seeBudget();
@@ -179,6 +180,9 @@ function UpdateBudget() {
   function toggleSideBar() {
     setSideBarOpen(!sideBarOpen);
   }
+  function handleResize() {
+    setIsScreenSmall(window.innerWidth < 1200);
+  }
 
   function handleCancelEdit() {
     setIsEditing(false);
@@ -204,6 +208,14 @@ function UpdateBudget() {
     });
   }, [items]);
 
+  //check size
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   function handleClosePopup() {
     setSelectedBudget(null);
   }
@@ -212,9 +224,12 @@ function UpdateBudget() {
     <>
       <div className={styles.wrapper}>
         <div className={styles.main}>
-          <button className={styles.toggle_btn} onClick={toggleSideBar}>
-            ☰
-          </button>
+          {isScreenSmall && (
+            <button className={styles.toggle_btn} onClick={toggleSideBar}>
+              ☰
+            </button>
+          )}
+
           <section
             className={`${styles.sidebar} ${
               sideBarOpen ? `${styles.show}` : ""

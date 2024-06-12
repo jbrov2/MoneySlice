@@ -20,6 +20,7 @@ function ViewAPie() {
   const [budget, setBudget] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(null);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [isScreenSmall, setIsScreenSmall] = useState(false);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -42,6 +43,16 @@ function ViewAPie() {
     seeBudget();
   }, []);
 
+  function handleResize() {
+    setIsScreenSmall(window.innerWidth < 1200);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   async function seeBudget() {
     try {
       const token = localStorage.getItem("accessToken");
@@ -95,9 +106,12 @@ function ViewAPie() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <button className={styles.toggle_btn} onClick={toggleSideBar}>
-          ☰
-        </button>
+        {isScreenSmall && (
+          <button className={styles.toggle_btn} onClick={toggleSideBar}>
+            ☰
+          </button>
+        )}
+
         <section
           className={`${styles.sidebar} ${sideBarOpen ? `${styles.show}` : ""}`}
         >

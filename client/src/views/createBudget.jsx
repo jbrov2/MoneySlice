@@ -20,6 +20,7 @@ function CreateAPie() {
   const [step, setStep] = useState(0);
   const [Category, setCategory] = useState("");
   const [Budget_Amounted, setBudget_Amounted] = useState("");
+  const [isScreenSmall, setIsScreenSmall] = useState(false);
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState("");
   const [itemAmountSpent, setItemAmountSpent] = useState("");
@@ -129,6 +130,18 @@ function CreateAPie() {
   function toggleSideBar() {
     setSideBarOpen(!sideBarOpen);
   }
+
+  function handleResize() {
+    setIsScreenSmall(window.innerWidth < 1200);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   async function handleSaveBudget() {
     const token = localStorage.getItem("accessToken");
     if (!Budget_Amounted) {
@@ -195,9 +208,12 @@ function CreateAPie() {
     <>
       <div className={styles.wrapper}>
         <div className={styles.main}>
-          <button className={styles.toggle_btn} onClick={toggleSideBar}>
-            ☰
-          </button>
+          {isScreenSmall && (
+            <button className={styles.toggle_btn} onClick={toggleSideBar}>
+              ☰
+            </button>
+          )}
+
           <section
             className={`${styles.sidebar} ${
               sideBarOpen ? `${styles.show}` : ""

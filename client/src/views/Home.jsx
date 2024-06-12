@@ -7,6 +7,11 @@ function Home() {
   const [userName, setUserName] = useState("");
   const [budgetCount, setBudgetCount] = useState(0);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [isScreenSmall, setIsScreenSmall] = useState(false);
+
+  function handleResize() {
+    setIsScreenSmall(window.innerWidth < 1200);
+  }
 
   function toggleSideBar() {
     setSideBarOpen(!sideBarOpen);
@@ -46,6 +51,13 @@ function Home() {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const handleHomePage = () => navigate("/home");
   const handleCreatePage = () => navigate("/createAPie");
   const handleViewPage = () => navigate("/viewAPie");
@@ -56,9 +68,12 @@ function Home() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <button className={styles.toggle_btn} onClick={toggleSideBar}>
-          ☰
-        </button>
+        {isScreenSmall && (
+          <button className={styles.toggle_btn} onClick={toggleSideBar}>
+            ☰
+          </button>
+        )}
+
         <section
           className={`${styles.sidebar} ${sideBarOpen ? `${styles.show}` : ""}`}
         >

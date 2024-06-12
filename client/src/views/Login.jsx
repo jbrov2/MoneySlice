@@ -137,7 +137,7 @@ function Login() {
                 onClick={submit}
                 className={styles.submit_btn}
               >
-                Submit
+                SUBMIT
               </button>
             </div>
           </form>
@@ -147,7 +147,7 @@ function Login() {
             <h1 className={styles.signUp_title}>Register</h1>
             <div className={styles.button}>
               <button onClick={signUpPageHandler} className={styles.signUp_btn}>
-                Register
+                SIGN UP
               </button>
             </div>
           </div>

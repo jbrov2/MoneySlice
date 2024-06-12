@@ -74,7 +74,7 @@
 }
 
 .input_style {
-    width: 80%;
+    width: 100%;
     margin: 1em 0;
     padding: 1em;
     border-radius: 25px;
@@ -176,6 +176,9 @@
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+ .signUp_content{
+ padding-bottom:4em ;
+ }
     .main {
         grid-template-columns: 1fr;
         grid-template-areas:

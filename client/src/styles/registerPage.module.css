@@ -11,9 +11,8 @@
 
 .signUp_wrapper {
     background: linear-gradient(to bottom, #ffffff, #85BDA6);
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
-    
     justify-content: center;
     align-items: center;
 }
@@ -112,6 +111,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .welcome_back_title {
@@ -196,6 +196,7 @@
     .signUp_container {
         overflow-y: scroll;
         grid-template-columns: 1fr; /* Change to single column layout on smaller screens */
+        height:100vh;
     }
     .create_account label, input{
        display: flex;

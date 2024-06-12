@@ -15,7 +15,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [passwordFocus, setPasswordFocus] = useState(false);
 
-  const LOGIN_URL = "http://localhost:5000/login";
+  const LOGIN_URL = "https://moneyslice-api.onrender.com/login";
 
   useEffect(() => {
     if (userRef.current) {

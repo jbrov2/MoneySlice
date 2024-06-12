@@ -14,4 +14,4 @@ Vite.js
 Made Site Responsive 6/10
 
 
-**Site is live at :**https://moneyslice.onrender.com
+**Site is live at :** https://moneyslice.onrender.com

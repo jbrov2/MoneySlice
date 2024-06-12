@@ -198,8 +198,11 @@
 }
 
 @media screen and (max-height: 1020px){
+    .main{
+        height: 100vh;
+    }
     .sidebar{
-        height: 100vh
+        height: 100%;
     }
 }
 

@@ -314,7 +314,14 @@
     color: black;
 }
 
-
+@media sceen and (max-height: 1020px){
+    .main{
+        height: 100vh;
+    }
+    .sidebar{
+        height: 100%;
+    }
+}
 @media screen and (max-width: 1200px){
     .main{
         grid-template-columns: 1fr;

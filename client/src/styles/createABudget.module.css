@@ -196,7 +196,7 @@
 
 .sidebar {
     grid-area: sidebar;
-    height: 100%;
+    height: 100vh;
     background-color: #2F4B26;
 }
 
@@ -255,9 +255,15 @@
     color: #3E885B;
 }
 
-@media screen and (max-height: 1080px){
+@media screen and (max-height: 1020px){
     .wrapper{
         overflow-y:auto ;
+    }
+    .main{
+        height: 100vh;
+    }
+    .sidebar{
+        height: 100%;
     }
 }
 
@@ -317,7 +323,10 @@
     .question_container{
         height: 100%;
         max-width: 300px;
+        padding-bottom:1em ;
+        margin-bottom: 1em;
         margin: auto;
+
     }
     .inputs{
         width: 100%;
@@ -325,7 +334,7 @@
     .navigation_button{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     .nav_btn{
@@ -354,6 +363,7 @@
         margin: auto;
         margin-top: 2em; /* Adjust the margin as needed */
         margin-bottom: 2em;
+        padding: 1em;
     }
 
 }

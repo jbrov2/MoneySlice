@@ -24,10 +24,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Dynamic grid columns */
     grid-gap: 20px; /* Added gap between grid items */
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
+    background-color:linear-gradient(to bottom, #ffffff, #85BDA6);
+    height: 100%;
 }
 
 .create_account {
@@ -191,14 +192,30 @@
 
 /* Media Queries */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
     .signUp_container {
+        overflow-y: scroll;
         grid-template-columns: 1fr; /* Change to single column layout on smaller screens */
+    }
+    .create_account label, input{
+       display: flex;
+       align-items: center;
+       margin-left:1em ;
     }
     
     .signUp_details_i {
-        width: calc(100% - 2rem); /* Adjusted width for smaller screens */
+        width: calc(100% - 2rem); 
+        margin-left: 1em;
         max-width: none; /* Removed max-width for smaller screens */
     }
+
+    .welcome_back_title{
+        font-size: 1.6em;
 }
 
+    .buttons{
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em;
+    }
+}

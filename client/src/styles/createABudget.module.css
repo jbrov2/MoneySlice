@@ -255,6 +255,11 @@
     color: #3E885B;
 }
 
+@media screen and (max-height: 1080px){
+    .wrapper{
+        overflow-y:auto ;
+    }
+}
 
 @media screen and (max-width:1200px){
     .main{

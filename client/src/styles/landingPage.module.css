@@ -80,7 +80,6 @@
    margin: 0.25em;
    color: #3E885B;
 
-
   }
 
   .landing_text:nth-child(3){
@@ -151,7 +150,29 @@
   }
 }
 
+@media screen and (max-height: 1020px){
 
+  .title{
+    font-size: 5em;
+  }
+
+
+  .landing_block{
+    padding: 1em;
+  }
+  .landing_text{
+    font-size: 3em;
+  }
+  #special_text{
+    font-size: 4em;
+  }
+  .landing_text:nth-child(3){
+    font-size: 3em;
+  }
+  .signUp_btn, .login_btn{
+    padding: 0.8em 2em;
+  }
+}
 
 /* For devices with width 1200px and below */
 @media (max-width: 1200px) {
@@ -160,7 +181,7 @@
         grid-template-areas: 'a'
                             "b";
         overflow-y: scroll;
-        overflow-x: hidden;
+        overflow-x: auto;
     }
   .title {
     padding: 1em;

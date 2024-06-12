@@ -11,7 +11,7 @@
 
 .signUp_wrapper {
     background: linear-gradient(to bottom, #ffffff, #85BDA6);
-    /* height: 100vh; */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,6 +192,13 @@
 }
 
 /* Media Queries */
+
+@media screen and (max-height:1020px){
+    .signUp_wrapper{
+        height: 100%;
+    }
+
+}
 
 @media only screen and (max-width: 1200px) {
     .signUp_container {
